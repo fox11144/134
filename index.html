@@ -40,15 +40,21 @@
                 <a href="#persona" class="nav-link page-nav-link">타겟 & 파트너</a>
                 <a href="#calculator" class="nav-link page-nav-link">포인트</a>
                 <a href="#qa" class="nav-link page-nav-link">Q&A</a>
-                <a href="#recruit" class="nav-link page-nav-link">채용</a>
                 <a href="#news" class="nav-link page-nav-link">최근 소식</a>
             </nav>
             <div class="nav-actions">
+                <!-- User points area (visible only when logged in) -->
+                <div class="user-points-display" id="headerPointsDisplay" style="display: none; align-items: center; gap: 6px; margin-right: 12px; background: rgba(25, 135, 84, 0.1); padding: 6px 12px; border-radius: 20px; font-weight: 700; color: var(--primary); font-size: 0.88rem;">
+                    <i data-lucide="award" style="width: 16px; height: 16px;"></i>
+                    <span class="points-label" style="opacity: 0.8; font-size: 0.78rem;">보유:</span>
+                    <span class="points-num" id="headerPointsNum">0 P</span>
+                </div>
                 <button class="theme-toggle" id="themeToggleBtn" aria-label="테마 변경">
                     <i data-lucide="moon" class="theme-icon-dark"></i>
                     <i data-lucide="sun" class="theme-icon-light" style="display: none;"></i>
                 </button>
                 <button class="btn btn-primary nav-btn" id="loginBtn">로그인</button>
+                <button class="btn btn-outline nav-btn" id="signupBtn" style="margin-left: 8px;">회원가입</button>
                 <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="메뉴 열기">
                     <i data-lucide="menu"></i>
                 </button>
@@ -68,9 +74,9 @@
             <a href="#persona" class="drawer-link page-nav-link">타겟 & 파트너</a>
             <a href="#calculator" class="drawer-link page-nav-link">포인트</a>
             <a href="#qa" class="drawer-link page-nav-link">Q&A</a>
-            <a href="#recruit" class="drawer-link page-nav-link">채용</a>
             <a href="#news" class="drawer-link page-nav-link">최근 소식</a>
             <a href="#login" class="drawer-link" id="mobileLoginBtn" style="margin-top: 10px; font-weight: 700; color: var(--primary);">로그인</a>
+            <a href="#signup" class="drawer-link" id="mobileSignupBtn" style="margin-top: 5px; font-weight: 700; color: var(--text-main);">회원가입</a>
         </nav>
     </div>
     <div class="drawer-overlay" id="drawerOverlay"></div>
@@ -137,9 +143,39 @@
                         <p class="intro-main-subtitle">귀찮음 없는 친환경과 시니어 일자리의 선순환 비즈니스 모델</p>
                     </div>
 
-                    <!-- Redesigned Two-Column Content -->
-                    <div class="grid grid-2 intro-two-column">
-                        <!-- Left Column: 서비스 소개글 -->
+                    <!-- Redesigned Vertical Stack Content -->
+                    <div class="intro-vertical-stack" style="display: flex; flex-direction: column; gap: 40px; margin-top: 30px;">
+                        
+                        <!-- Top Row: 기업 소개글 -->
+                        <div class="intro-card company-intro">
+                            <div class="intro-card-header">
+                                <div class="intro-icon bg-senior"><i data-lucide="building-2"></i></div>
+                                <h2>에코팡 기업 소개</h2>
+                            </div>
+                            <div class="intro-card-body">
+                                <p class="intro-desc-lead">
+                                    에코팡 주식회사는 환경 보존(E)과 소외 계층 일자리 창출(S)을 혁신적인 비즈니스 모델로 연결하는 ESG 상생 혁신 벤처 기업입니다.
+                                </p>
+                                <p class="intro-desc-text">
+                                    우리는 단순한 박스 판매를 넘어, 동네 기반 시니어 인력을 활용한 박스 역물류 회수 생태계를 구축하고 있습니다. 은퇴한 어르신들에게 유연하고 안전한 동네 일자리를 제공함으로써 사회적 활력을 불어넣고, 수거된 자원은 100% 자원화 사이클을 통해 자원 재활용률 극대화에 앞장섭니다.
+                                </p>
+                                <div class="intro-company-vision" style="margin-bottom: 24px;">
+                                    <div class="vision-item">
+                                        <strong>비전</strong>
+                                        <span>물류 폐기물 Zero & 시니어 행복 상생 일터 구축</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Sponsorship Inquiry Button -->
+                                <div class="intro-action-area">
+                                    <button class="btn btn-primary btn-sponsorship" id="sponsorBtn">
+                                        <i data-lucide="mail"></i> 기업 협찬 및 파트너십 문의
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Row: 서비스 소개글 -->
                         <div class="intro-card service-intro">
                             <div class="intro-card-header">
                                 <div class="intro-icon bg-consumer"><i data-lucide="leaf"></i></div>
@@ -149,7 +185,7 @@
                                 <p class="intro-desc-lead">
                                     에코팡은 바쁜 현대인들의 택배 포장재 배출 스트레스와 과대 포장 문제를 해결하는 혁신적인 친환경 역물류 플랫폼입니다.
                                 </p>
-                                <div class="intro-feature-list">
+                                <div class="intro-feature-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px;">
                                     <div class="intro-feature-item">
                                         <div class="feature-bullet"><i data-lucide="zap"></i></div>
                                         <div>
@@ -175,34 +211,120 @@
                             </div>
                         </div>
 
-                        <!-- Right Column: 기업 소개글 -->
-                        <div class="intro-card company-intro">
-                            <div class="intro-card-header">
-                                <div class="intro-icon bg-senior"><i data-lucide="building-2"></i></div>
-                                <h2>에코팡 기업 소개</h2>
-                            </div>
-                            <div class="intro-card-body">
-                                <p class="intro-desc-lead">
-                                    에코팡 주식회사는 환경 보존(E)과 소외 계층 일자리 창출(S)을 혁신적인 비즈니스 모델로 연결하는 ESG 상생 혁신 벤처 기업입니다.
-                                </p>
-                                <p class="intro-desc-text">
-                                    우리는 단순한 박스 판매를 넘어, 동네 기반 시니어 인력을 활용한 박스 역물류 회수 생태계를 구축하고 있습니다. 은퇴한 어르신들에게 유연하고 안전한 동네 일자리를 제공함으로써 사회적 활력을 불어넣고, 수거된 자원은 100% 자원화 사이클을 통해 자원 재활용률 극대화에 앞장섭니다.
-                                </p>
-                                <div class="intro-company-vision">
-                                    <div class="vision-item">
-                                        <strong>비전</strong>
-                                        <span>물류 폐기물 Zero & 시니어 행복 상생 일터 구축</span>
+                        <!-- 최소 패키지 기획안 (Collapsible Accordion) -->
+                        <div class="min-pkg-accordion" id="minPkgAccordion" style="background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s ease;">
+                            <button class="min-pkg-trigger" id="minPkgTrigger" style="width: 100%; padding: 24px 30px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; text-align: left; cursor: pointer; color: var(--text-main); outline: none;">
+                                <div style="display: flex; align-items: center; gap: 14px;">
+                                    <div class="min-pkg-icon" style="width: 44px; height: 44px; background: rgba(25, 135, 84, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 12px;">
+                                        <i data-lucide="package-check" style="width: 22px; height: 22px;"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0; color: var(--text-main);">💡 에코팡 친환경 최소 패키지 (Minimum Packaging) 기획안</h3>
+                                        <span style="font-size: 0.82rem; color: var(--text-sub); display: block; margin-top: 4px;">불필요한 과대 포장을 차단하는 에코팡의 친환경 포장 가이드라인 (클릭하여 열기)</span>
                                     </div>
                                 </div>
-                                
-                                <!-- Sponsorship Inquiry Button -->
-                                <div class="intro-action-area">
-                                    <button class="btn btn-primary btn-sponsorship" id="sponsorBtn">
-                                        <i data-lucide="mail"></i> 기업 협찬 및 파트너십 문의
-                                    </button>
+                                <span class="min-pkg-chevron" id="minPkgChevron" style="transition: transform 0.3s ease; color: var(--text-sub);"><i data-lucide="chevron-down"></i></span>
+                            </button>
+                            
+                            <div class="min-pkg-content" id="minPkgContent" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background-color: var(--bg-alt); border-top: 0 solid var(--border);">
+                                <div style="padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+                                    <div class="min-pkg-block" style="background-color: var(--card-bg); border-left: 4px solid var(--primary); padding: 18px 24px; border-radius: 0 12px 12px 0;">
+                                        <h4 style="font-size: 0.98rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                            <i data-lucide="check-circle" style="width: 18px; height: 18px;"></i>
+                                            최소 패키지 핵심 정의
+                                        </h4>
+                                        <p style="font-size: 0.9rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+                                            최소 패키지(Minimum Packaging)는 상품의 운송에 필수적인 <strong>최소한의 자원만을 활용하여 쓰레기 발생량을 0에 가깝게 만드는 포장 철학</strong>입니다. 비닐 테이프, 플라스틱 에어캡(뽁뽁이) 등 썩지 않는 부자재를 100% 배제하고 친환경 단일 종이 소재로 구성합니다.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="intro-feature-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                                        <div style="background-color: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 14px;">
+                                            <h5 style="font-size: 0.9rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: var(--primary);">①</span> 테이프 프리 (Tape-Free)
+                                            </h5>
+                                            <p style="font-size: 0.82rem; color: var(--text-sub); line-height: 1.5; margin: 0;">
+                                                박스 날개 접합부에 칼선을 내어 끼워 맞추는 조립식 구조와 친환경 전분 수성 접착 부자재를 적용하여 화학 테이프를 완전 없앱니다.
+                                            </p>
+                                        </div>
+                                        <div style="background-color: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 14px;">
+                                            <h5 style="font-size: 0.9rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: var(--primary);">②</span> 친환경 벌집 완충재
+                                            </h5>
+                                            <p style="font-size: 0.82rem; color: var(--text-sub); line-height: 1.5; margin: 0;">
+                                                비닐 에어캡 대신 벌집 모양으로 가공되어 뛰어난 쿠션감을 제공하는 100% 재활용 종이 완충재를 사용해 파손을 방지합니다.
+                                            </p>
+                                        </div>
+                                        <div style="background-color: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 14px;">
+                                            <h5 style="font-size: 0.9rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: var(--primary);">③</span> 최적 크기 박스 자동 매칭
+                                            </h5>
+                                            <p style="font-size: 0.82rem; color: var(--text-sub); line-height: 1.5; margin: 0;">
+                                                물품 적치 체적을 3D 연산하여 빈 공간이 15% 미만이 되도록 가장 조밀한 크기의 표준 박스를 자동 권장하여 운송 탄소 효율을 극대화합니다.
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- 에코 포인트 리워드 기획안 (Collapsible Accordion) -->
+                        <div class="min-pkg-accordion" id="ecoPointsAccordion" style="margin-top: 20px; background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s ease;">
+                            <button class="min-pkg-trigger" id="ecoPointsTrigger" style="width: 100%; padding: 24px 30px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; text-align: left; cursor: pointer; color: var(--text-main); outline: none;">
+                                <div style="display: flex; align-items: center; gap: 14px;">
+                                    <div class="min-pkg-icon" style="width: 44px; height: 44px; background: rgba(25, 135, 84, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 12px;">
+                                        <i data-lucide="coins" style="width: 22px; height: 22px;"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style="font-size: 1.15rem; font-weight: 800; margin: 0; color: var(--text-main);">🪙 에코팡 포인트 리워드 (Eco Rewards) 시스템 가이드</h3>
+                                        <span style="font-size: 0.82rem; color: var(--text-sub); display: block; margin-top: 4px;">지속 가능한 자원 순환 참여를 독려하는 포인트 혜택 및 교환 방법 (클릭하여 열기)</span>
+                                    </div>
+                                </div>
+                                <span class="min-pkg-chevron" id="ecoPointsChevron" style="transition: transform 0.3s ease; color: var(--text-sub);"><i data-lucide="chevron-down"></i></span>
+                            </button>
+                            
+                            <div class="min-pkg-content" id="ecoPointsContent" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background-color: var(--bg-alt); border-top: 0 solid var(--border);">
+                                <div style="padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+                                    <div class="min-pkg-block" style="background-color: var(--card-bg); border-left: 4px solid var(--primary); padding: 18px 24px; border-radius: 0 12px 12px 0;">
+                                        <h4 style="font-size: 0.98rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                            <i data-lucide="help-circle" style="width: 18px; height: 18px;"></i>
+                                            에코픽 포인트란 무엇인가요?
+                                        </h4>
+                                        <p style="font-size: 0.9rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+                                            에코픽 포인트는 에코팡 다회용 수거 박스 또는 보랭팩 회수 신청이 완료될 때마다 지급되는 <strong>친환경 ESG 리워드 포인트</strong>입니다. 단순 환경 보호 캠페인을 넘어 소비자의 적극적인 자원 순환 동참을 유도하고 실생활의 경제적 혜택으로 보답하는 선순환 앱테크 수단입니다.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="intro-feature-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                                        <div style="background-color: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 14px;">
+                                            <h5 style="font-size: 0.9rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: var(--primary);">①</span> 1회 수거당 150P 적립
+                                            </h5>
+                                            <p style="font-size: 0.82rem; color: var(--text-sub); line-height: 1.5; margin: 0;">
+                                                문앞에 배출해둔 다회용 수거 박스를 시니어 크루가 회수 완료하면, 박스 1개당 150 에코픽 포인트가 로그인된 사용자 계정으로 즉시 자동 적립됩니다.
+                                            </p>
+                                        </div>
+                                        <div style="background-color: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 14px;">
+                                            <h5 style="font-size: 0.9rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: var(--primary);">②</span> 실생활 밀착형 교환 혜택
+                                            </h5>
+                                            <p style="font-size: 0.82rem; color: var(--text-sub); line-height: 1.5; margin: 0;">
+                                                누적된 포인트는 '포인트 교환 상점'을 통해 컴포즈 커피 기프티콘, 조각 케이크, 친환경 리유저블 텀블러 및 종량제 쓰레기 봉투로 즉시 교환하여 사용하실 수 있습니다.
+                                            </p>
+                                        </div>
+                                        <div style="background-color: var(--card-bg); border: 1px solid var(--border); padding: 20px; border-radius: 14px;">
+                                            <h5 style="font-size: 0.9rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                                                <span style="color: var(--primary);">③</span> 시니어 일자리와 결합
+                                            </h5>
+                                            <p style="font-size: 0.82rem; color: var(--text-sub); line-height: 1.5; margin: 0;">
+                                                포인트 보상 재원은 에코팡 박스 역물류 절감을 통한 물류 수익금 및 기업 파트너십 협찬금으로 마련되어, 자원 수거에 동참하시는 어르신들의 인건비로도 함께 선순환됩니다.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -287,58 +409,16 @@
         <div id="calculator-page" class="page-content">
             <section class="calculator-section" id="calculator">
                 <div class="container">
-                    <div class="calculator-box">
-                        <div class="calculator-grid">
-                            <div class="calc-intro">
-                                <h2>에코팡 선순환 시뮬레이터</h2>
-                                <p>나의 배송 박스 수거 참여가 만드는 놀라운 환경적·사회적 효과를 시뮬레이션해 보세요.</p>
-                                
-                                <div class="calc-inputs">
-                                    <div class="form-group">
-                                        <label for="weeklyDelivery">주간 평균 택배 수령 횟수</label>
-                                        <div class="range-slider-container">
-                                            <input type="range" id="weeklyDelivery" min="1" max="15" value="4" class="slider">
-                                            <span class="slider-value" id="deliveryVal">4회</span>
-                                        </div>
-                                    </div>
-                                </div>
+                    <!-- 에코 포인트 대시보드 -->
+                    <div class="points-dashboard" style="margin-bottom: 40px; background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 24px; padding: 40px; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center; text-align: center;">
+                        <div class="points-dashboard-card" style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+                            <div class="points-db-icon" style="width: 72px; height: 72px; background: rgba(25, 135, 84, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 50%;">
+                                <i data-lucide="piggy-bank" style="width: 36px; height: 36px;"></i>
                             </div>
-
-                            <div class="calc-results">
-                                <h3>예상 기여도 및 리워드 (연간 기준)</h3>
-                                
-                                <div class="result-cards-grid">
-                                    <div class="result-card">
-                                        <div class="res-icon color-green"><i data-lucide="leaf"></i></div>
-                                        <div class="res-text">
-                                            <span class="res-label">탄소(CO₂) 저감량</span>
-                                            <span class="res-val" id="carbonVal">0 kg</span>
-                                            <span class="res-sub">소나무 약 <span id="treeVal">0</span>그루 식재 효과</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="result-card">
-                                        <div class="res-icon color-gold"><i data-lucide="piggy-bank"></i></div>
-                                        <div class="res-text">
-                                            <span class="res-label">적립 에코픽 포인트</span>
-                                            <span class="res-val" id="pointsVal">0 P</span>
-                                            <span class="res-sub">제휴 브랜드 기프티콘 교환 가능</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="result-card">
-                                        <div class="res-icon color-blue"><i data-lucide="hourglass"></i></div>
-                                        <div class="res-text">
-                                            <span class="res-label">시니어 파트너 일자리 시간</span>
-                                            <span class="res-val" id="seniorTimeVal">0 시간</span>
-                                            <span class="res-sub">어르신 일터 참여 및 소통 기회 지원</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="calc-footer-msg">
-                                    <p><i data-lucide="info"></i> 탄소 저감량은 종이 박스 및 플라스틱 테이프 생분해 대체 계산 기준입니다.</p>
-                                </div>
+                            <div class="points-db-info">
+                                <span class="points-db-label" style="font-size: 0.95rem; font-weight: 700; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.05em;">나의 보유 에코픽 포인트</span>
+                                <h2 id="pointsVal" style="font-size: 3rem; font-weight: 900; color: var(--primary); margin: 8px 0;">60,000 P</h2>
+                                <p class="points-db-desc" style="font-size: 0.95rem; color: var(--text-sub); max-width: 500px; line-height: 1.6;">에코팡 다회용 박스 수거 참여에 감사드립니다. 적립된 친환경 포인트로 아래 상점의 원하시는 상품을 바로 교환해 보세요.</p>
                             </div>
                         </div>
                     </div>
@@ -368,43 +448,43 @@
                             <!-- Item 2 -->
                             <div class="shop-card">
                                 <div class="shop-img-wrapper">
-                                    <i data-lucide="coffee" class="shop-item-icon"></i>
+                                    <img src="image/커피.png" alt="컴포즈커피 아메리카노" class="shop-item-img">
                                 </div>
                                 <div class="shop-info">
                                     <span class="shop-category">카페/디저트</span>
-                                    <h3>스타벅스 아메리카노 Tall</h3>
+                                    <h3>컴포즈커피 아메리카노 Hot</h3>
                                     <div class="shop-price">
-                                        <span class="price-val">4,500</span> <span class="price-unit">P</span>
+                                        <span class="price-val">2,000</span> <span class="price-unit">P</span>
                                     </div>
-                                    <button class="btn btn-secondary btn-exchange" data-item="스타벅스 아메리카노" data-price="4500">교환 신청</button>
+                                    <button class="btn btn-secondary btn-exchange" data-item="컴포즈커피 아메리카노" data-price="2000">교환 신청</button>
                                 </div>
                             </div>
                             <!-- Item 3 -->
                             <div class="shop-card">
                                 <div class="shop-img-wrapper">
-                                    <i data-lucide="gift" class="shop-item-icon"></i>
+                                    <img src="image/텀블러.jpg" alt="친환경 리유저블 텀블러" class="shop-item-img">
                                 </div>
                                 <div class="shop-info">
-                                    <span class="shop-category">상품권</span>
-                                    <h3>이마트 모바일 금액권 (1만원)</h3>
+                                    <span class="shop-category">친환경 라이프</span>
+                                    <h3>에코팡 친환경 리유저블 텀블러</h3>
                                     <div class="shop-price">
-                                        <span class="price-val">10,000</span> <span class="price-unit">P</span>
+                                        <span class="price-val">8,000</span> <span class="price-unit">P</span>
                                     </div>
-                                    <button class="btn btn-secondary btn-exchange" data-item="이마트 모바일 금액권" data-price="10000">교환 신청</button>
+                                    <button class="btn btn-secondary btn-exchange" data-item="친환경 리유저블 텀블러" data-price="8000">교환 신청</button>
                                 </div>
                             </div>
                             <!-- Item 4 -->
                             <div class="shop-card">
                                 <div class="shop-img-wrapper">
-                                    <i data-lucide="smile" class="shop-item-icon"></i>
+                                    <img src="image/미니케이크.jpg" alt="초콜릿 조각 케이크" class="shop-item-img">
                                 </div>
                                 <div class="shop-info">
-                                    <span class="shop-category">친환경 라이프</span>
-                                    <h3>대나무 친환경 칫솔 세트 (4입)</h3>
+                                    <span class="shop-category">카페/디저트</span>
+                                    <h3>투썸플레이스 초콜릿 조각 케이크</h3>
                                     <div class="shop-price">
-                                        <span class="price-val">5,500</span> <span class="price-unit">P</span>
+                                        <span class="price-val">6,500</span> <span class="price-unit">P</span>
                                     </div>
-                                    <button class="btn btn-secondary btn-exchange" data-item="대나무 친환경 칫솔 세트" data-price="5500">교환 신청</button>
+                                    <button class="btn btn-secondary btn-exchange" data-item="조각 케이크" data-price="6500">교환 신청</button>
                                 </div>
                             </div>
                         </div>
@@ -521,49 +601,6 @@
             </section>
         </div>
 
-        <!-- PAGE 7: 채용 -->
-        <div id="recruit-page" class="page-content">
-            <section class="recruit-section" id="recruit">
-                <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">에코팡 인재 채용</h2>
-                        <p class="section-desc">지속가능한 친환경 상생 물류 생태계를 함께 만들어 나갈 든든한 동료를 찾습니다.</p>
-                    </div>
-                    <div class="grid grid-2 recruit-grid">
-                        <div class="recruit-card">
-                            <div class="recruit-card-header">
-                                <span class="recruit-tag tag-senior">시니어 일자리</span>
-                                <h3>동네 자원 수거 시니어 크루</h3>
-                            </div>
-                            <div class="recruit-card-body">
-                                <p class="recruit-lead">내가 살고 있는 친숙한 동네에서 에코팡 배송 상자를 안전하게 회수하고 관리하는 보람찬 일자리입니다.</p>
-                                <ul class="recruit-bullet-list">
-                                    <li><i data-lucide="check"></i> <strong>지원 자격:</strong> 만 60세 이상 어르신 (신체 건강하고 도보 활동이 가능하신 분)</li>
-                                    <li><i data-lucide="check"></i> <strong>근무 조건:</strong> 주 2~3일, 하루 2~3시간 자율 조율 근무</li>
-                                    <li><i data-lucide="check"></i> <strong>활동 혜택:</strong> 안전 보험 가입, 조끼 및 회수 카트 전원 지원, 정기 건강상담</li>
-                                </ul>
-                                <button class="btn btn-primary recruit-apply-btn" id="applySeniorBtn">간편 지원하기</button>
-                            </div>
-                        </div>
-                        <div class="recruit-card">
-                            <div class="recruit-card-header">
-                                <span class="recruit-tag tag-youth">청년 / 일반</span>
-                                <h3>지역 거점 물류 매니저</h3>
-                            </div>
-                            <div class="recruit-card-body">
-                                <p class="recruit-lead">수거 거점에서 시니어 크루 분들의 활동을 조율하고, 회수 자원 검수 및 세척 자동화 설비를 관리하는 코어 운영 직무입니다.</p>
-                                <ul class="recruit-bullet-list">
-                                    <li><i data-lucide="check"></i> <strong>지원 자격:</strong> 물류/경영/사회혁신 분야에 관심이 있는 신입 및 경력직</li>
-                                    <li><i data-lucide="check"></i> <strong>근무 조건:</strong> 주 5일 전일제 근무 (수습 후 정규직 전환)</li>
-                                    <li><i data-lucide="check"></i> <strong>우대 사항:</strong> 노인 일자리 유관기관 근무 경험 및 ESG 사회공헌 프로젝트 경력자</li>
-                                </ul>
-                                <button class="btn btn-primary recruit-apply-btn" id="applyYouthBtn">채용 지원하기</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
 
         <!-- PAGE 8: 최근 소식 -->
         <div id="news-page" class="page-content">
@@ -703,8 +740,14 @@
                     <span>또는 간편 로그인</span>
                 </div>
                 <div class="social-logins">
-                    <button class="btn btn-social btn-kakao" onclick="alert('카카오 간편 로그인 준비 중입니다.');"><i data-lucide="message-circle"></i> 카카오톡 로그인</button>
-                    <button class="btn btn-social btn-naver" onclick="alert('네이버 간편 로그인 준비 중입니다.');">N 네이버 로그인</button>
+                    <button class="btn btn-social btn-google" id="googleLoginBtn" type="button">
+                        <svg viewBox="0 0 24 24" width="18" height="18" style="margin-right: 8px;">
+                            <path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.859-3.578-7.859-8s3.53-8 7.859-8c2.46 0 4.105 1.025 5.047 1.926l3.227-3.107C18.28 1.845 15.42 1 12.24 1 6.01 1 1 6.01 1 12.24s5.01 11.24 11.24 11.24c6.5 0 10.83-4.57 10.83-11.03 0-.74-.08-1.3-.18-1.83H12.24z"/>
+                        </svg>
+                        구글 계정 로그인
+                    </button>
+                    <button class="btn btn-social btn-kakao" onclick="alert('카카오 간편 로그인 준비 중입니다.');" type="button"><i data-lucide="message-circle"></i> 카카오톡 로그인</button>
+                    <button class="btn btn-social btn-naver" onclick="alert('네이버 간편 로그인 준비 중입니다.');" type="button">N 네이버 로그인</button>
                 </div>
             </div>
         </div>

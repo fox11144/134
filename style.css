@@ -2299,6 +2299,17 @@ body.dark-mode .footer {
     stroke-width: 1.5px;
 }
 
+.shop-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.shop-card:hover .shop-item-img {
+    transform: scale(1.06);
+}
+
 .shop-info {
     padding: 20px;
     display: flex;
@@ -2581,6 +2592,17 @@ body.dark-mode .footer {
     color: #ffffff !important;
 }
 
+.btn-google {
+    background-color: #ffffff !important;
+    color: #1e293b !important;
+    border: 1px solid var(--border) !important;
+    transition: background-color 0.2s ease;
+}
+
+.btn-google:hover {
+    background-color: #f8fafc !important;
+}
+
 @media (max-width: 1024px) {
     .shop-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2601,5 +2623,9 @@ body.dark-mode .footer {
     .news-grid {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+    .intro-feature-list {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
     }
 }

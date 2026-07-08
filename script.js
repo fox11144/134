@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "#persona": "persona-page",
         "#calculator": "calculator-page",
         "#qa": "qa-page",
-        "#recruit": "recruit-page",
         "#news": "news-page"
     };
 
@@ -146,48 +145,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // 7. Interactive Eco Calculator
-        const weeklyDeliverySlider = document.getElementById("weeklyDelivery");
-        const deliveryValDisplay = document.getElementById("deliveryVal");
+    // 7. Eco Points Dashboard Updater
+    const basePoints = 60000;
 
-        const carbonVal = document.getElementById("carbonVal");
-        const treeVal = document.getElementById("treeVal");
+    function calculateEcoImpact() {
         const pointsVal = document.getElementById("pointsVal");
-        const seniorTimeVal = document.getElementById("seniorTimeVal");
+        const headerPointsNum = document.getElementById("headerPointsNum");
 
-        // Standard factors per box (unit: kg, points, hours)
-        const standardFactors = { carbon: 0.25, points: 150, seniorHours: 0.08 };
+        // Retrieve deducted points
+        const deductedPoints = parseInt(localStorage.getItem("eco-deducted-points")) || 0;
+        const totalPoints = Math.max(0, basePoints - deductedPoints);
 
-        function calculateEcoImpact() {
-            const weeklyCount = parseInt(weeklyDeliverySlider.value, 10);
-
-            // Total boxes per year
-            const annualBoxes = weeklyCount * 52;
-
-            // Calculate values
-            const totalCarbon = (annualBoxes * standardFactors.carbon).toFixed(1);
-            const totalPoints = annualBoxes * standardFactors.points;
-            const totalSeniorHours = (annualBoxes * standardFactors.seniorHours).toFixed(1);
-
-            // Pine trees calculation (1 tree absorbs ~6.6kg of CO2 per year)
-            const treesEquivalent = (parseFloat(totalCarbon) / 6.6).toFixed(1);
-
-            // Display results
-            carbonVal.textContent = `${Number(totalCarbon).toLocaleString()} kg`;
-            treeVal.textContent = treesEquivalent;
+        // Display results
+        if (pointsVal) {
             pointsVal.textContent = `${totalPoints.toLocaleString()} P`;
-            seniorTimeVal.textContent = `${Number(totalSeniorHours).toLocaleString()} 시간`;
         }
 
-        if (weeklyDeliverySlider) {
-            weeklyDeliverySlider.addEventListener("input", (e) => {
-                deliveryValDisplay.textContent = `${e.target.value}회`;
-                calculateEcoImpact();
-            });
+        // Sync with header points display
+        if (headerPointsNum) {
+            headerPointsNum.textContent = `${totalPoints.toLocaleString()} P`;
         }
+    }
 
-        // Initial calculation
-        calculateEcoImpact();
+    // Initial calculation
+    calculateEcoImpact();
 
     // 8. Sponsorship Inquiry Modal Handler
     const sponsorBtn = document.getElementById("sponsorBtn");
@@ -280,16 +261,39 @@ document.addEventListener("DOMContentLoaded", () => {
     // 10. Login Modal Handlers
     const loginBtn = document.getElementById("loginBtn");
     const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const mobileSignupBtn = document.getElementById("mobileSignupBtn");
+    const headerPointsDisplay = document.getElementById("headerPointsDisplay");
+    const headerPointsNum = document.getElementById("headerPointsNum");
     const loginModal = document.getElementById("loginModal");
     const loginModalClose = document.getElementById("loginModalClose");
     const loginForm = document.getElementById("loginForm");
 
+    const updateLoginUI = (isLoggedIn) => {
+        if (isLoggedIn) {
+            if (loginBtn) loginBtn.textContent = "로그아웃";
+            if (mobileLoginBtn) mobileLoginBtn.textContent = "로그아웃";
+            if (signupBtn) signupBtn.style.display = "none";
+            if (mobileSignupBtn) mobileSignupBtn.style.display = "none";
+            if (headerPointsDisplay) {
+                headerPointsDisplay.style.display = "flex";
+                const pointsValEl = document.getElementById("pointsVal");
+                if (pointsValEl && headerPointsNum) {
+                    headerPointsNum.textContent = pointsValEl.textContent;
+                }
+            }
+        } else {
+            if (loginBtn) loginBtn.textContent = "로그인";
+            if (mobileLoginBtn) mobileLoginBtn.textContent = "로그인";
+            if (signupBtn) signupBtn.style.display = "inline-flex";
+            if (mobileSignupBtn) mobileSignupBtn.style.display = "block";
+            if (headerPointsDisplay) headerPointsDisplay.style.display = "none";
+        }
+    };
+
     // Restore login state from localStorage on load
     const savedLoginEmail = localStorage.getItem("eco-login-email");
-    if (savedLoginEmail) {
-        if (loginBtn) loginBtn.textContent = "로그아웃";
-        if (mobileLoginBtn) mobileLoginBtn.textContent = "로그아웃";
-    }
+    updateLoginUI(!!savedLoginEmail);
 
     const openLoginModal = () => {
         if (loginModal) {
@@ -313,16 +317,23 @@ document.addEventListener("DOMContentLoaded", () => {
             // Logout flow
             localStorage.removeItem("eco-login-email");
             alert("로그아웃되었습니다.");
-            if (loginBtn) loginBtn.textContent = "로그인";
-            if (mobileLoginBtn) mobileLoginBtn.textContent = "로그인";
+            updateLoginUI(false);
         } else {
             // Login flow (Open modal)
             openLoginModal();
         }
     };
 
+    const handleSignupClick = (e) => {
+        if (e) e.preventDefault();
+        alert("회원가입 기능은 현재 준비 중입니다.\n\n소셜 로그인(구글/카카오)을 이용하시면 별도의 정보 입력 절차 없이 즉시 1초 만에 회원 가입 및 로그인이 완료됩니다!");
+        openLoginModal();
+    };
+
     if (loginBtn) loginBtn.addEventListener("click", handleLoginClick);
     if (mobileLoginBtn) mobileLoginBtn.addEventListener("click", handleLoginClick);
+    if (signupBtn) signupBtn.addEventListener("click", handleSignupClick);
+    if (mobileSignupBtn) mobileSignupBtn.addEventListener("click", handleSignupClick);
     if (loginModalClose) loginModalClose.addEventListener("click", closeLoginModal);
     
     if (loginModal) {
@@ -343,9 +354,18 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("eco-login-email", email);
             
             closeLoginModal();
-            // Change login buttons to logout
-            if (loginBtn) loginBtn.textContent = "로그아웃";
-            if (mobileLoginBtn) mobileLoginBtn.textContent = "로그아웃";
+            updateLoginUI(true);
+        });
+    }
+
+    // Google Social Login Button Handler
+    const googleLoginBtn = document.getElementById("googleLoginBtn");
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener("click", () => {
+            alert("구글 계정 연동 로그인이 성공적으로 완료되었습니다!");
+            localStorage.setItem("eco-login-email", "google-user@gmail.com");
+            closeLoginModal();
+            updateLoginUI(true);
         });
     }
 
@@ -366,31 +386,77 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 const confirmExchange = confirm(`🎉 에코픽 포인트를 교환하시겠습니까?\n\n상품명: ${itemName}\n소모 포인트: ${itemPrice.toLocaleString()} P\n\n교환을 승인하시려면 [확인]을 누르세요.`);
                 if (confirmExchange) {
-                    alert(`교환 신청이 성공적으로 완료되었습니다!\n\n차감 포인트: ${itemPrice.toLocaleString()} P\n\n작성하신 휴대폰 기프티콘 번호로 모바일 쿠폰이 즉시 전송됩니다.`);
+                    // Deduct points and save to localStorage
+                    let deductedPoints = parseInt(localStorage.getItem("eco-deducted-points")) || 0;
+                    deductedPoints += itemPrice;
+                    localStorage.setItem("eco-deducted-points", deductedPoints);
+
+                    // Recalculate and update displays
+                    calculateEcoImpact();
+
+                    alert(`교환 신청이 성공적으로 완료되었습니다!\n\n차감 포인트: -${itemPrice.toLocaleString()} P\n\n작성하신 휴대폰 기프티콘 번호로 모바일 쿠폰이 즉시 전송됩니다.`);
                 }
             }
         });
     });
 
-    // 12. Recruitment Application Handler (Requires login check)
-    const applySeniorBtn = document.getElementById("applySeniorBtn");
-    const applyYouthBtn = document.getElementById("applyYouthBtn");
+    // 12. Minimum Packaging Accordion Toggle
+    const minPkgTrigger = document.getElementById("minPkgTrigger");
+    const minPkgContent = document.getElementById("minPkgContent");
+    const minPkgChevron = document.getElementById("minPkgChevron");
+    const minPkgAccordion = document.getElementById("minPkgAccordion");
 
-    const handleApply = (role) => {
-        const isLoggedIn = localStorage.getItem("eco-login-email");
-        if (!isLoggedIn) {
-            alert("로그인이 필요한 서비스입니다.\n\n상단의 [로그인] 버튼을 눌러 로그인을 먼저 진행해 주세요!");
-            // Automatically trigger login modal opening
-            openLoginModal();
-        } else {
-            if (role === "senior") {
-                alert("시니어 크루 지원이 성공적으로 접수되었습니다!\n\n은평구/서대문구 시니어클럽의 채용 담당자가 기재하신 번호로 유선 연락드리겠습니다.");
-            } else if (role === "youth") {
-                alert("지역 거점 물류 매니저 지원 서류가 성공적으로 접수되었습니다!\n\n가입해 주신 이메일 주소로 상세 입사 지원 서류 가이드와 양식을 즉시 전송해 드리겠습니다.");
+    if (minPkgTrigger && minPkgContent) {
+        minPkgTrigger.addEventListener("click", () => {
+            const isOpen = minPkgAccordion.classList.contains("open");
+            
+            if (isOpen) {
+                minPkgAccordion.classList.remove("open");
+                minPkgContent.style.maxHeight = "0";
+                minPkgContent.style.borderTopWidth = "0px";
+                if (minPkgChevron) minPkgChevron.style.transform = "rotate(0deg)";
+            } else {
+                minPkgAccordion.classList.add("open");
+                // Set max-height to scroll height for smooth slide down
+                minPkgContent.style.maxHeight = minPkgContent.scrollHeight + "px";
+                minPkgContent.style.borderTopWidth = "1px";
+                if (minPkgChevron) minPkgChevron.style.transform = "rotate(180deg)";
             }
-        }
-    };
+            
+            // Re-initialize Lucide Icons for icon change
+            if (typeof lucide !== "undefined") {
+                lucide.createIcons();
+            }
+        });
+    }
 
-    if (applySeniorBtn) applySeniorBtn.addEventListener("click", () => handleApply("senior"));
-    if (applyYouthBtn) applyYouthBtn.addEventListener("click", () => handleApply("youth"));
+    // 13. Eco Points Accordion Toggle
+    const ecoPointsTrigger = document.getElementById("ecoPointsTrigger");
+    const ecoPointsContent = document.getElementById("ecoPointsContent");
+    const ecoPointsChevron = document.getElementById("ecoPointsChevron");
+    const ecoPointsAccordion = document.getElementById("ecoPointsAccordion");
+
+    if (ecoPointsTrigger && ecoPointsContent) {
+        ecoPointsTrigger.addEventListener("click", () => {
+            const isOpen = ecoPointsAccordion.classList.contains("open");
+            
+            if (isOpen) {
+                ecoPointsAccordion.classList.remove("open");
+                ecoPointsContent.style.maxHeight = "0";
+                ecoPointsContent.style.borderTopWidth = "0px";
+                if (ecoPointsChevron) ecoPointsChevron.style.transform = "rotate(0deg)";
+            } else {
+                ecoPointsAccordion.classList.add("open");
+                // Set max-height to scroll height for smooth slide down
+                ecoPointsContent.style.maxHeight = ecoPointsContent.scrollHeight + "px";
+                ecoPointsContent.style.borderTopWidth = "1px";
+                if (ecoPointsChevron) ecoPointsChevron.style.transform = "rotate(180deg)";
+            }
+            
+            // Re-initialize Lucide Icons for icon change
+            if (typeof lucide !== "undefined") {
+                lucide.createIcons();
+            }
+        });
+    }
 });
