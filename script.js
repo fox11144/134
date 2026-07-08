@@ -481,4 +481,271 @@ document.addEventListener("DOMContentLoaded", () => {
             demoInterval = null;
         }
     }
+
+    // 13. Lightbox for Diagram Image (사진 1)
+    const diagramImage = document.getElementById("diagramImage");
+    const zoomDiagramBtn = document.getElementById("zoomDiagramBtn");
+    const diagramLightboxModal = document.getElementById("diagramLightboxModal");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    if (diagramLightboxModal) {
+        const openLightbox = () => {
+            diagramLightboxModal.classList.add("active");
+            document.body.style.overflow = "hidden"; // disable scroll
+        };
+
+        const closeLightbox = () => {
+            diagramLightboxModal.classList.remove("active");
+            document.body.style.overflow = ""; // enable scroll
+        };
+
+        if (diagramImage) diagramImage.addEventListener("click", openLightbox);
+        if (zoomDiagramBtn) zoomDiagramBtn.addEventListener("click", openLightbox);
+        if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+
+        diagramLightboxModal.addEventListener("click", (e) => {
+            if (e.target === diagramLightboxModal) {
+                closeLightbox();
+            }
+        });
+    }
+
+    // 14. Eco Lucky Gacha (Lucky Draw) Logic
+    const playGachaBtn = document.getElementById("playGachaBtn");
+    const gachaBowl = document.getElementById("gachaBowl");
+    const gachaCrank = document.getElementById("gachaCrank");
+    const rolledCapsule = document.getElementById("rolledCapsule");
+    const gachaResultModal = document.getElementById("gachaResultModal");
+    const gachaResultCloseBtn = document.getElementById("gachaResultCloseBtn");
+    const gachaPrizeTier = document.getElementById("gachaPrizeTier");
+    const gachaPrizeName = document.getElementById("gachaPrizeName");
+    const gachaPrizeValue = document.getElementById("gachaPrizeValue");
+
+    let isGachaPlaying = false;
+
+    function playSound(type) {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            if (type === 'spin') {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(700, ctx.currentTime + 1.2);
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 1.2);
+                osc.start();
+                osc.stop(ctx.currentTime + 1.2);
+            } else if (type === 'win') {
+                const now = ctx.currentTime;
+                const playChime = (freq, time, duration) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, time);
+                    gain.gain.setValueAtTime(0.12, time);
+                    gain.gain.exponentialRampToValueAtTime(0.01, time + duration);
+                    osc.start(time);
+                    osc.stop(time + duration);
+                };
+                playChime(523.25, now, 0.3); // C5
+                playChime(659.25, now + 0.12, 0.4); // E5
+                playChime(783.99, now + 0.24, 0.5); // G5
+                playChime(1046.50, now + 0.36, 0.6); // C6
+            }
+        } catch (e) {
+            console.log("Audio not supported");
+        }
+    }
+
+    function triggerConfetti() {
+        const container = document.getElementById("gachaConfetti");
+        if (!container) return;
+        container.innerHTML = "";
+        const colors = ["#10b981", "#3b82f6", "#ef4444", "#f59e0b", "#ec4899", "#8b5cf6"];
+        for (let i = 0; i < 40; i++) {
+            const p = document.createElement("div");
+            p.style.position = "absolute";
+            p.style.width = `${Math.random() * 8 + 5}px`;
+            p.style.height = `${Math.random() * 8 + 5}px`;
+            p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            p.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+            p.style.left = `${Math.random() * 100}%`;
+            p.style.top = "-10px";
+            p.style.opacity = Math.random() * 0.7 + 0.3;
+            p.style.transform = `rotate(${Math.random() * 360}deg)`;
+            container.appendChild(p);
+
+            const speed = Math.random() * 2.5 + 1.5;
+            const drift = (Math.random() - 0.5) * 120;
+            p.animate([
+                { transform: `translateY(0) rotate(0deg)`, opacity: p.style.opacity },
+                { transform: `translateY(360px) translateX(${drift}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+            ], {
+                duration: speed * 1000,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                fill: 'forwards'
+            });
+        }
+    }
+
+    if (playGachaBtn) {
+        playGachaBtn.addEventListener("click", () => {
+            if (isGachaPlaying) return;
+
+            // 1. Check Login Status
+            const isLoggedIn = !!localStorage.getItem("eco-login-email");
+            if (!isLoggedIn) {
+                alert("가챠를 진행하려면 먼저 로그인해주시기 바랍니다.");
+                const loginModal = document.getElementById("loginModal");
+                if (loginModal) loginModal.classList.add("active");
+                return;
+            }
+
+            // 2. Check Point Balance
+            const currentDeducted = parseInt(localStorage.getItem("eco-deducted-points")) || 0;
+            const totalPoints = Math.max(0, basePoints - currentDeducted);
+            if (totalPoints < 100) {
+                alert("보유 에코포인트가 부족합니다. (최소 100 P 필요)");
+                return;
+            }
+
+            isGachaPlaying = true;
+            playGachaBtn.disabled = true;
+            playGachaBtn.innerHTML = `<span class="spinner" style="display: inline-block; animation: spin-loader 1s infinite linear; margin-right: 8px;">⏳</span> 행운의 캡슐 뽑는 중...`;
+
+            // Start animations & sound
+            if (gachaBowl) gachaBowl.classList.add("shaking");
+            if (gachaCrank) gachaCrank.classList.add("rotating");
+            if (rolledCapsule) {
+                rolledCapsule.style.display = "none";
+            }
+            playSound("spin");
+
+            setTimeout(() => {
+                // Stop animations
+                if (gachaBowl) gachaBowl.classList.remove("shaking");
+                if (gachaCrank) gachaCrank.classList.remove("rotating");
+
+                // Roll out capsule visual
+                if (rolledCapsule) {
+                    const capsuleColors = [
+                        "linear-gradient(135deg, #10b981 50%, #34d399 50%)",
+                        "linear-gradient(135deg, #f59e0b 50%, #fbbf24 50%)",
+                        "linear-gradient(135deg, #ef4444 50%, #f87171 50%)",
+                        "linear-gradient(135deg, #3b82f6 50%, #60a5fa 50%)",
+                        "linear-gradient(135deg, #8b5cf6 50%, #a78bfa 50%)"
+                    ];
+                    rolledCapsule.style.background = capsuleColors[Math.floor(Math.random() * capsuleColors.length)];
+                    rolledCapsule.style.display = "block";
+                }
+
+                // Wait 0.5s for capsule drop visual, then open result modal
+                setTimeout(() => {
+                    // Determine prize outcome based on user specified percentages:
+                    // 1등: 1%, 2등: 3%, 3등: 5%, 4등: 50%, 행운상: 41%
+                    const rand = Math.random() * 100;
+                    let prize = { tier: "행운상", name: "에코픽 50 P 페이백", val: "50 P 즉시 적립", refund: 50, color: "#64748b" };
+
+                    if (rand < 1) {
+                        prize = { tier: "1등", name: "에코팡 리유저블 텀블러", val: "8,000 P 가치", refund: 0, color: "#d97706" };
+                    } else if (rand < 4) {
+                        prize = { tier: "2등", name: "투썸플레이스 초콜릿 조각 케이크", val: "6,500 P 가치", refund: 0, color: "#db2777" };
+                    } else if (rand < 9) {
+                        prize = { tier: "3등", name: "컴포즈커피 아메리카노 Hot", val: "2,000 P 가치", refund: 0, color: "#2563eb" };
+                    } else if (rand < 59) {
+                        prize = { tier: "4등", name: "에코픽 100 P 페이백", val: "100 P 즉시 적립", refund: 100, color: "#059669" };
+                    }
+
+                    // Deduct cost and refund payback
+                    const newDeducted = currentDeducted + 100 - prize.refund;
+                    localStorage.setItem("eco-deducted-points", newDeducted);
+                    calculateEcoImpact(); // Update point displays on page
+
+                    // Determine user display name for Winners Board
+                    let userEmail = localStorage.getItem("eco-login-email") || "user@domain.com";
+                    let displayName = "이*선 (나)";
+                    if (userEmail.includes("@")) {
+                        let parts = userEmail.split("@");
+                        let username = parts[0];
+                        if (username.length > 2) {
+                            displayName = username.slice(0, 1) + "*".repeat(username.length - 2) + username.slice(-1) + " (나)";
+                        } else {
+                            displayName = username + "* (나)";
+                        }
+                    }
+
+                    // Add to Winners Board
+                    const winnersList = document.getElementById("gachaWinnersList");
+                    if (winnersList) {
+                        const winnerItem = document.createElement("div");
+                        winnerItem.className = "winner-item animate-fade-in";
+                        winnerItem.style.fontSize = "0.8rem";
+                        winnerItem.style.padding = "8px 12px";
+                        winnerItem.style.backgroundColor = "var(--card-bg)";
+                        winnerItem.style.border = "1px solid var(--border)";
+                        winnerItem.style.borderRadius = "10px";
+                        winnerItem.style.display = "flex";
+                        winnerItem.style.flexDirection = "column";
+                        winnerItem.style.gap = "2px";
+                        
+                        let tierColor = "#64748b";
+                        if (prize.tier === "1등") tierColor = "#d97706";
+                        else if (prize.tier === "2등") tierColor = "#db2777";
+                        else if (prize.tier === "3등") tierColor = "#2563eb";
+                        else if (prize.tier === "4등") tierColor = "#059669";
+
+                        winnerItem.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; font-weight: 700; color: var(--text-main);">
+                                <span>${displayName}</span>
+                                <span style="color: ${tierColor}; font-size: 0.72rem; font-weight: bold;">${prize.tier} 당첨!</span>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-sub); display: flex; justify-content: space-between;">
+                                <span>${prize.name}</span>
+                                <span>방금 전</span>
+                            </div>
+                        `;
+                        winnersList.insertBefore(winnerItem, winnersList.firstChild);
+                        while (winnersList.children.length > 8) {
+                            winnersList.removeChild(winnersList.lastChild);
+                        }
+                    }
+
+                    // Fill modal content
+                    if (gachaPrizeTier) {
+                        gachaPrizeTier.textContent = prize.tier;
+                        gachaPrizeTier.style.backgroundColor = prize.color;
+                    }
+                    if (gachaPrizeName) gachaPrizeName.textContent = prize.name;
+                    if (gachaPrizeValue) gachaPrizeValue.textContent = prize.val;
+
+                    // Open result modal
+                    if (gachaResultModal) {
+                        gachaResultModal.classList.add("active");
+                    }
+                    
+                    playSound("win");
+                    triggerConfetti();
+
+                    // Reset button state
+                    isGachaPlaying = false;
+                    playGachaBtn.disabled = false;
+                    playGachaBtn.innerHTML = `<i data-lucide="dices" style="width: 20px; height: 20px; margin-right: 8px;"></i> 1회 뽑기 (100 P 소모)`;
+                    if (typeof lucide !== "undefined") lucide.createIcons(); // refresh icon
+                }, 500);
+
+            }, 1200);
+        });
+    }
+
+    if (gachaResultCloseBtn && gachaResultModal) {
+        gachaResultCloseBtn.addEventListener("click", () => {
+            gachaResultModal.classList.remove("active");
+            if (rolledCapsule) rolledCapsule.style.display = "none";
+        });
+    }
 });

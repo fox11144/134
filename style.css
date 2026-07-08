@@ -1924,7 +1924,7 @@ body.dark-mode .footer {
 
 .slogan-title {
     font-size: 3.8rem;
-    line-height: 1.2;
+    line-height: 1.38;
     font-weight: 900;
     color: var(--text-main);
     letter-spacing: -0.03em;
@@ -2767,3 +2767,172 @@ body.dark-mode .footer {
         height: 300px !important;
     }
 }
+
+/* Features Diagram Component Styles */
+.features-diagram-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+    margin-top: 40px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.features-diagram-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+}
+
+.diagram-visual-area {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.diagram-visual-area:hover {
+    border-color: rgba(25, 135, 84, 0.3);
+    box-shadow: 0 0 20px rgba(25, 135, 84, 0.08);
+}
+
+.diagram-img {
+    max-width: 100%;
+    max-height: 480px;
+    object-fit: contain;
+    border-radius: 12px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.diagram-visual-area:hover .diagram-img {
+    transform: scale(1.015);
+}
+
+.diagram-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(11, 15, 23, 0.7) 0%, rgba(11, 15, 23, 0) 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    pointer-events: none;
+    border-radius: 16px;
+}
+
+.diagram-visual-area:hover .diagram-overlay {
+    opacity: 1;
+}
+
+/* Lightbox Modal Custom Layout */
+.lightbox-content-box {
+    position: relative;
+    width: auto;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.active .lightbox-content-box {
+    transform: scale(1);
+}
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+.lightbox-caption {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Gacha Capsule Machine Animations */
+@keyframes shake-gacha {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-2px, 2px) rotate(-1deg); }
+    20% { transform: translate(3px, -1px) rotate(2deg); }
+    30% { transform: translate(-1px, -3px) rotate(-2deg); }
+    40% { transform: translate(2px, 2px) rotate(1deg); }
+    50% { transform: translate(-3px, 1px) rotate(-1deg); }
+    60% { transform: translate(1px, -2px) rotate(2deg); }
+    70% { transform: translate(-2px, -1px) rotate(-2deg); }
+    80% { transform: translate(3px, 2px) rotate(1deg); }
+    90% { transform: translate(-1px, -2px) rotate(-1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.gacha-bowl.shaking {
+    animation: shake-gacha 0.15s infinite;
+}
+
+@keyframes drop-capsule {
+    0% { transform: translateY(-30px) scale(0.5); opacity: 0; }
+    50% { transform: translateY(0) scale(1.1); opacity: 1; }
+    80% { transform: translateY(-4px) scale(0.95); }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.gacha-capsule {
+    transition: transform 0.2s ease;
+}
+
+/* Shake individual capsules during machine shake */
+.gacha-bowl.shaking .gacha-capsule {
+    animation: shake-capsules 0.2s infinite alternate;
+}
+
+@keyframes shake-capsules {
+    0% { transform: translate(2px, 5px) scale(1.05); }
+    100% { transform: translate(-5px, -2px) scale(0.95); }
+}
+
+/* Crank rotation animation */
+.gacha-crank.rotating {
+    transform: rotate(360deg);
+}
+
+@media (max-width: 768px) {
+    .gacha-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+    }
+}
+
+@keyframes spin-loader {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
