@@ -204,15 +204,26 @@ document.addEventListener("DOMContentLoaded", () => {
     calculateEcoImpact();
 
     // 8. Sponsorship Inquiry Modal Handler
-    const sponsorBtn = document.getElementById("sponsorBtn");
     const sponsorModal = document.getElementById("sponsorModal");
     const sponsorModalClose = document.getElementById("sponsorModalClose");
     const sponsorForm = document.getElementById("sponsorForm");
+    const sponsorBtns = document.querySelectorAll("#sponsorBtn, #mobileSponsorBtn, #heroSponsorBtn, #footerSponsorBtn");
 
-    if (sponsorBtn && sponsorModal && sponsorModalClose) {
-        sponsorBtn.addEventListener("click", () => {
-            sponsorModal.classList.add("active");
-            document.body.style.overflow = "hidden";
+    if (sponsorModal && sponsorModalClose) {
+        sponsorBtns.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                sponsorModal.classList.add("active");
+                document.body.style.overflow = "hidden";
+                
+                // Close mobile drawer if open
+                const mobileDrawer = document.getElementById("mobileDrawer");
+                const drawerOverlay = document.getElementById("drawerOverlay");
+                if (mobileDrawer && mobileDrawer.classList.contains("active")) {
+                    mobileDrawer.classList.remove("active");
+                    if (drawerOverlay) drawerOverlay.classList.remove("active");
+                }
+            });
         });
 
         const closeSponsorModal = () => {
@@ -647,17 +658,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Wait 0.5s for capsule drop visual, then open result modal
                 setTimeout(() => {
                     // Determine prize outcome based on user specified percentages:
-                    // 1등: 1%, 2등: 3%, 3등: 5%, 4등: 50%, 행운상: 41%
+                    // 1등: 5%, 2등: 10%, 3등: 20%, 4등: 35%, 행운상: 30%
                     const rand = Math.random() * 100;
                     let prize = { tier: "행운상", name: "에코픽 50 P 페이백", val: "50 P 즉시 적립", refund: 50, color: "#64748b" };
 
-                    if (rand < 1) {
+                    if (rand < 5) {
                         prize = { tier: "1등", name: "에코팡 리유저블 텀블러", val: "8,000 P 가치", refund: 0, color: "#d97706" };
-                    } else if (rand < 4) {
+                    } else if (rand < 15) {
                         prize = { tier: "2등", name: "투썸플레이스 초콜릿 조각 케이크", val: "6,500 P 가치", refund: 0, color: "#db2777" };
-                    } else if (rand < 9) {
+                    } else if (rand < 35) {
                         prize = { tier: "3등", name: "컴포즈커피 아메리카노 Hot", val: "2,000 P 가치", refund: 0, color: "#2563eb" };
-                    } else if (rand < 59) {
+                    } else if (rand < 70) {
                         prize = { tier: "4등", name: "에코픽 100 P 페이백", val: "100 P 즉시 적립", refund: 100, color: "#059669" };
                     }
 

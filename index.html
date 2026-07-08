@@ -56,6 +56,7 @@
                 </button>
                 <button class="btn btn-primary nav-btn" id="loginBtn">로그인</button>
                 <button class="btn btn-outline nav-btn" id="signupBtn" style="margin-left: 8px;">회원가입</button>
+                <button class="btn btn-outline nav-btn" id="sponsorBtn" style="margin-left: 8px; border-color: var(--primary); color: var(--primary);">협찬 문의</button>
                 <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="메뉴 열기">
                     <i data-lucide="menu"></i>
                 </button>
@@ -79,6 +80,7 @@
             <a href="#news" class="drawer-link page-nav-link">최근 소식</a>
             <a href="#login" class="drawer-link" id="mobileLoginBtn" style="margin-top: 10px; font-weight: 700; color: var(--primary);">로그인</a>
             <a href="#signup" class="drawer-link" id="mobileSignupBtn" style="margin-top: 5px; font-weight: 700; color: var(--text-main);">회원가입</a>
+            <a href="#sponsor" class="drawer-link" id="mobileSponsorBtn" style="margin-top: 5px; font-weight: 700; color: #f59e0b;">협찬 문의</a>
         </nav>
     </div>
     <div class="drawer-overlay" id="drawerOverlay"></div>
@@ -119,8 +121,9 @@
                             <span class="tag">#AI 최소 패키징</span>
                             <span class="tag">#B2C 에코 리워드</span>
                         </div>
-                        <div class="slogan-actions">
+                        <div class="slogan-actions" style="display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap;">
                             <a href="#about" class="btn btn-primary page-nav-link">서비스 소개글 보기 <i data-lucide="arrow-right" style="margin-left: 8px; width: 16px; height: 16px;"></i></a>
+                            <button class="btn btn-outline" id="heroSponsorBtn" style="display: inline-flex; align-items: center; gap: 8px;"><i data-lucide="mail" style="width: 16px; height: 16px;"></i> 협찬 및 제휴 문의</button>
                         </div>
                     </div>
                 </div>
@@ -615,35 +618,35 @@
                                         <span style="font-size: 0.8rem; font-weight: 700; color: #d97706; display: flex; align-items: center; gap: 6px;">
                                             <span style="background-color: #f59e0b; color: #ffffff; font-size: 0.65rem; padding: 2px 5px; border-radius: 5px;">1등</span> 에코팡 리유저블 텀블러
                                         </span>
-                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 1%</span>
+                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 5%</span>
                                     </div>
                                     <!-- 2등 -->
                                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: rgba(236, 72, 153, 0.08); border: 1px solid rgba(236, 72, 153, 0.15);">
                                         <span style="font-size: 0.8rem; font-weight: 700; color: #db2777; display: flex; align-items: center; gap: 6px;">
                                             <span style="background-color: #ec4899; color: #ffffff; font-size: 0.65rem; padding: 2px 5px; border-radius: 5px;">2등</span> 초콜릿 조각 케이크
                                         </span>
-                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 3%</span>
+                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 10%</span>
                                     </div>
                                     <!-- 3등 -->
                                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.15);">
                                         <span style="font-size: 0.8rem; font-weight: 700; color: #2563eb; display: flex; align-items: center; gap: 6px;">
                                             <span style="background-color: #3b82f6; color: #ffffff; font-size: 0.65rem; padding: 2px 5px; border-radius: 5px;">3등</span> 아메리카노 Hot
                                         </span>
-                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 5%</span>
+                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 20%</span>
                                     </div>
                                     <!-- 4등 -->
                                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15);">
                                         <span style="font-size: 0.8rem; font-weight: 700; color: #059669; display: flex; align-items: center; gap: 6px;">
                                             <span style="background-color: #10b981; color: #ffffff; font-size: 0.65rem; padding: 2px 5px; border-radius: 5px;">4등</span> 에코픽 100 P 페이백
                                         </span>
-                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 50%</span>
+                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 35%</span>
                                     </div>
                                     <!-- 5등 -->
                                     <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 10px; background-color: var(--bg-main); border: 1px solid var(--border);">
                                         <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px;">
                                             <span style="background-color: var(--text-sub); color: #ffffff; font-size: 0.65rem; padding: 2px 5px; border-radius: 5px;">행운</span> 에코픽 50 P 페이백
                                         </span>
-                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 41%</span>
+                                        <span style="font-size: 0.78rem; font-weight: bold; color: var(--text-sub);">확률 30%</span>
                                     </div>
                                 </div>
 
@@ -853,8 +856,8 @@
                     <p>SCAMPER 아이디어 도출</p>
                 </div>
                 <div class="link-group">
-                    <h4>사회적 가치</h4>
-                    <p>노인 일자리 창출 (ESG 실현)</p>
+                    <h4>파트너십 및 가치</h4>
+                    <p style="cursor: pointer; color: var(--text-sub); transition: color 0.2s;" id="footerSponsorBtn">협찬 및 제휴 문의</p>
                     <p>자원 역물류 시스템 구축</p>
                 </div>
             </div>
