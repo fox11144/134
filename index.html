@@ -41,6 +41,7 @@
                 <a href="#scamper" class="nav-link page-nav-link">SCAMPER</a>
                 <a href="#gallery" class="nav-link page-nav-link">자료실</a>
                 <a href="#calculator" class="nav-link page-nav-link">에코 계산기</a>
+                <a href="#qa" class="nav-link page-nav-link">Q&A</a>
             </nav>
             <div class="nav-actions">
                 <button class="theme-toggle" id="themeToggleBtn" aria-label="테마 변경">
@@ -68,6 +69,7 @@
             <a href="#scamper" class="drawer-link page-nav-link">SCAMPER</a>
             <a href="#gallery" class="drawer-link page-nav-link">자료실</a>
             <a href="#calculator" class="drawer-link page-nav-link">에코 계산기</a>
+            <a href="#qa" class="drawer-link page-nav-link">Q&A</a>
         </nav>
     </div>
     <div class="drawer-overlay" id="drawerOverlay"></div>
@@ -542,16 +544,6 @@
                 </div>
             </section>
 
-            <!-- Lightbox Modal for Gallery -->
-            <div class="lightbox" id="lightbox">
-                <button class="lightbox-close" id="lightboxClose"><i data-lucide="x"></i></button>
-                <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i data-lucide="chevron-left"></i></button>
-                <div class="lightbox-content">
-                    <img src="" alt="확대 이미지" id="lightboxImg">
-                    <div class="lightbox-caption" id="lightboxCaption">이미지 설명</div>
-                </div>
-                <button class="lightbox-nav lightbox-next" id="lightboxNext"><i data-lucide="chevron-right"></i></button>
-            </div>
         </div>
 
         <!-- PAGE 5: 에코 계산기 -->
@@ -624,6 +616,114 @@
                 </div>
             </section>
         </div>
+
+        <!-- PAGE 6: Q&A -->
+        <div id="qa-page" class="page-content">
+            <section class="qa-section" id="qa">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">서비스 Q&A 및 보완 대책</h2>
+                        <p class="section-desc">서비스 운영 및 기술 도입 시 제기될 수 있는 주요 우려 사항에 대한 현실적인 방어 전략과 보완 아이디어입니다.</p>
+                    </div>
+
+                    <div class="qa-accordion-list">
+                        <!-- Q1 -->
+                        <div class="qa-item">
+                            <button class="qa-trigger">
+                                <span class="qa-number">01</span>
+                                <span class="qa-question">📦 종이박스 파손 및 보안 문제 (가장 중요한 우려 사항)</span>
+                                <span class="qa-chevron"><i data-lucide="chevron-down"></i></span>
+                            </button>
+                            <div class="qa-collapse">
+                                <div class="qa-body">
+                                    <div class="qa-block block-problem">
+                                        <h4><i data-lucide="alert-triangle"></i> 예상되는 문제점</h4>
+                                        <p>비닐 테이프를 없애고 종이 지퍼선만으로 박스를 마감할 경우, 배송 과정(던짐, 적재, 흔들림)이나 눈·비가 오는 악천후 상황에서 박스가 쉽게 찢어지거나 물에 젖어 터질 위험이 큽니다. 특히 내부 물품이 무겁거나 모서리가 날카로우면 파손율이 급증합니다. 또한, 테이핑이 없으면 이동 중에 누군가 쉽게 뜯어보고 훔쳐 갈 수 있는 보안(도난) 문제도 생깁니다.</p>
+                                    </div>
+                                    <div class="qa-block block-solution">
+                                        <h4><i data-lucide="lightbulb"></i> 현실적인 보완 아이디어</h4>
+                                        <ul>
+                                            <li><strong>친환경 방수 코팅 종이 사용:</strong> 완전한 종이 상자 대신, 외부 충격과 수분에 강한 친환경 방수 코팅(생분해성 수지 코팅) 종이를 사용합니다.</li>
+                                            <li><strong>접착력 및 보안 보완:</strong> 접착 부위에는 뜯으면 흔적이 남는 녹말 성분의 친환경 수성 접착제나 종이 테이프를 최소한으로 보완 적용하여 보안과 내구성을 동시에 잡을 수 있습니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="qa-item">
+                            <button class="qa-trigger">
+                                <span class="qa-number">02</span>
+                                <span class="qa-question">👵 시니어 회수 전담팀 운영의 현실적 제약</span>
+                                <span class="qa-chevron"><i data-lucide="chevron-down"></i></span>
+                            </button>
+                            <div class="qa-collapse">
+                                <div class="qa-body">
+                                    <div class="qa-block block-problem">
+                                        <h4><i data-lucide="alert-triangle"></i> 예상되는 문제점</h4>
+                                        <p>배송 기사님의 부담을 덜고 일자리를 창출한다는 취지는 매우 좋으나, 물류의 핵심은 '속도와 효율'입니다. 시니어 인력의 경우 도보나 실버 카트를 이용하는 경우가 많아 회수 속도가 느릴 수 있고, 아파트 출입문 보안(공동현관 비밀번호 등) 문제나 엘리베이터가 없는 빌라 지역에서의 체력적 한계가 걸림돌이 됩니다.</p>
+                                    </div>
+                                    <div class="qa-block block-solution">
+                                        <h4><i data-lucide="lightbulb"></i> 현실적인 보완 아이디어</h4>
+                                        <ul>
+                                            <li><strong>'거점형 수거 모델' 도입:</strong> 어르신들이 집집마다 방문하는 것이 아니라, 아파트 단지 내 '실버 택배 거점'이나 편의점, 무인 택배함 등 지정된 거점에 모인 박스/프레시백만 일괄 수거하여 분류하는 방식으로 신체적 부담과 보안 문제를 줄입니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="qa-item">
+                            <button class="qa-trigger">
+                                <span class="qa-number">03</span>
+                                <span class="qa-question">🛍️ 프레시백 미회수 및 세척(위생) 비용</span>
+                                <span class="qa-chevron"><i data-lucide="chevron-down"></i></span>
+                            </button>
+                            <div class="qa-collapse">
+                                <div class="qa-body">
+                                    <div class="qa-block block-problem">
+                                        <h4><i data-lucide="alert-triangle"></i> 예상되는 문제점</h4>
+                                        <p>쿠팡 등 대기업도 겪고 있는 문제입니다. 소비자가 프레시백을 집 안에 보관하고 밖에 내놓지 않으면 자산 손실이 커집니다. 또한, 회수된 박스나 백을 다시 쓰려면 '살균 및 세척' 단계가 필수적인데, 이 과정에서 발생하는 인건비, 세척장 부지 비용, 위생 관리 리스크가 생각보다 매우 큽니다.</p>
+                                    </div>
+                                    <div class="qa-block block-solution">
+                                        <h4><i data-lucide="lightbulb"></i> 현실적인 보완 아이디어</h4>
+                                        <ul>
+                                            <li><strong>보증금 제도 강화:</strong> '에코픽 포인트'라는 인센티브뿐만 아니라, 미회수 시 페널티를 부여하는 강력한 보증금(예: 백당 2,000원 결제 후 회수 시 환불) 제도가 병행되어야 합니다.</li>
+                                            <li><strong>세척 자동화 공정 도입:</strong> 기획안에 명시된 '살균 기술 접합 ECO 시스템'을 자동화 공정으로 설계하여 세척 단가를 낮추는 기술적 보완이 필요합니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="qa-item">
+                            <button class="qa-trigger">
+                                <span class="qa-number">04</span>
+                                <span class="qa-question">💻 AI · XR 기술 도입의 높은 초기 비용</span>
+                                <span class="qa-chevron"><i data-lucide="chevron-down"></i></span>
+                            </button>
+                            <div class="qa-collapse">
+                                <div class="qa-body">
+                                    <div class="qa-block block-problem">
+                                        <h4><i data-lucide="alert-triangle"></i> 예상되는 문제점</h4>
+                                        <p>XR 물류 기술과 AI를 활용해 빈 공간을 계산하고 최적 패키징을 하는 시스템은 개발 비용이 많이 들고 대형 물류센터 수준의 설비가 필요합니다. 초기 자본이 부족한 창업 단계에서는 과도한 기술 투자가 독이 될 수 있습니다.</p>
+                                    </div>
+                                    <div class="qa-block block-solution">
+                                        <h4><i data-lucide="lightbulb"></i> 현실적인 보완 아이디어</h4>
+                                        <ul>
+                                            <li><strong>MVP 단계 간이 소프트웨어 도입:</strong> 초기에는 고가의 XR 설비 대신, 상품의 가로·세로·높이 데이터를 기반으로 알맞은 박스 크기를 추천해 주는 간이 소프트웨어(알고리즘) 방식을 먼저 도입하고, 사업이 확장되면 고도화하는 방향이 현실적입니다.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -655,6 +755,17 @@
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox Modal for Gallery -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose"><i data-lucide="x"></i></button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i data-lucide="chevron-left"></i></button>
+        <div class="lightbox-content">
+            <img src="" alt="확대 이미지" id="lightboxImg">
+            <div class="lightbox-caption" id="lightboxCaption">이미지 설명</div>
+        </div>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext"><i data-lucide="chevron-right"></i></button>
+    </div>
 
     <!-- Sponsorship Inquiry Modal -->
     <div class="modal-overlay" id="sponsorModal">

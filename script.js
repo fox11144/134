@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "#persona": "persona-page",
         "#scamper": "scamper-page",
         "#gallery": "gallery-page",
-        "#calculator": "calculator-page"
+        "#calculator": "calculator-page",
+        "#qa": "qa-page"
     };
 
     function switchPage(targetHash) {
@@ -348,4 +349,33 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     }
+
+    // 9. Q&A Accordion Toggles
+    const qaTriggers = document.querySelectorAll(".qa-trigger");
+    qaTriggers.forEach(trigger => {
+        trigger.addEventListener("click", () => {
+            const qaItem = trigger.closest(".qa-item");
+            
+            // Toggle open class
+            const isOpen = qaItem.classList.contains("open");
+            
+            // Close other items (accordion behavior)
+            document.querySelectorAll(".qa-item").forEach(item => {
+                item.classList.remove("open");
+                const icon = item.querySelector(".qa-chevron i");
+                if (icon) icon.setAttribute("data-lucide", "chevron-down");
+            });
+
+            if (!isOpen) {
+                qaItem.classList.add("open");
+                const icon = qaItem.querySelector(".qa-chevron i");
+                if (icon) icon.setAttribute("data-lucide", "chevron-up");
+            }
+            
+            // Re-initialize Lucide Icons for icon change
+            if (typeof lucide !== "undefined") {
+                lucide.createIcons();
+            }
+        });
+    });
 });
