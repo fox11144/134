@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Display results
             if (pointsVal) {
                 pointsVal.textContent = `${totalPoints.toLocaleString()} P`;
-                pointsVal.style.fontSize = "3rem";
+                pointsVal.classList.remove("logged-out");
             }
             if (pointsDesc) {
                 pointsDesc.innerHTML = "에코팡 다회용 박스 수거 참여에 감사드립니다. 적립된 친환경 포인트로 아래 상점의 원하시는 상품을 바로 교환해 보세요.";
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Display locked state
             if (pointsVal) {
                 pointsVal.textContent = "로그인 필요";
-                pointsVal.style.fontSize = "2.2rem";
+                pointsVal.classList.add("logged-out");
             }
             if (pointsDesc) {
                 pointsDesc.innerHTML = "보유 포인트를 조회하고 상품을 교환하려면 상단에서 <strong>로그인</strong>을 진행해 주세요.";
