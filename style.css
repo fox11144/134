@@ -2741,3 +2741,29 @@ body.dark-mode .footer {
         display: block !important;
     }
 }
+
+/* AI·XR Logistics Demo Animation & Layout styles */
+@keyframes laser-scan {
+    0% { top: 0%; }
+    50% { top: 98%; }
+    100% { top: 0%; }
+}
+
+.pulse-indicator {
+    animation: indicator-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes indicator-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.4; }
+}
+
+@media (max-width: 768px) {
+    .demo-grid-layout {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    .demo-scan-zone {
+        height: 300px !important;
+    }
+}

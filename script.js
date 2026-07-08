@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageMap = {
         "#home": "home-page",
         "#about": "about-page",
+        "#features": "features-page",
         "#persona": "persona-page",
         "#calculator": "calculator-page",
         "#qa": "qa-page",
@@ -37,6 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Show target page
             targetPage.classList.add("active-page");
+
+            if (targetHash === "#features") {
+                startDemoSimulation();
+            } else {
+                stopDemoSimulation();
+            }
 
             // Scroll to the top of the page instantly
             window.scrollTo(0, 0);
@@ -86,6 +93,9 @@ document.addEventListener("DOMContentLoaded", () => {
         pageSections.forEach(page => page.classList.remove("active-page"));
         document.getElementById(pageMap[initialHash]).classList.add("active-page");
         updateNavActiveStates(initialHash);
+        if (initialHash === "#features") {
+            startDemoSimulation();
+        }
     }
 
     // 3. Mobile Drawer Navigation
@@ -431,4 +441,44 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // 12. AI-XR Logistics Demo Simulator Telemetry
+    let demoInterval = null;
+
+    function startDemoSimulation() {
+        const scanW = document.getElementById("scan-w");
+        const scanD = document.getElementById("scan-d");
+        const scanH = document.getElementById("scan-h");
+        const optimalBoxCode = document.getElementById("optimal-box-code");
+
+        if (demoInterval) clearInterval(demoInterval);
+
+        demoInterval = setInterval(() => {
+            // Generate slightly fluctuating sensor values to simulate real-time scanning
+            const w = (24.0 + Math.random() * 1.5).toFixed(1);
+            const d = (18.0 + Math.random() * 1.2).toFixed(1);
+            const h = (11.5 + Math.random() * 1.0).toFixed(1);
+
+            if (scanW) scanW.textContent = `${w}cm`;
+            if (scanD) scanD.textContent = `${d}cm`;
+            if (scanH) scanH.textContent = `${h}cm`;
+
+            // Calculate mock box category code based on combined size
+            const sum = parseFloat(w) + parseFloat(d) + parseFloat(h);
+            let code = "ECO-03";
+            if (sum < 53.5) {
+                code = "ECO-02";
+            } else if (sum > 55.0) {
+                code = "ECO-04";
+            }
+            if (optimalBoxCode) optimalBoxCode.textContent = code;
+        }, 800);
+    }
+
+    function stopDemoSimulation() {
+        if (demoInterval) {
+            clearInterval(demoInterval);
+            demoInterval = null;
+        }
+    }
 });
