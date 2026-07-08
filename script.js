@@ -151,19 +151,42 @@ document.addEventListener("DOMContentLoaded", () => {
     function calculateEcoImpact() {
         const pointsVal = document.getElementById("pointsVal");
         const headerPointsNum = document.getElementById("headerPointsNum");
+        const pointsDesc = document.getElementById("pointsDesc");
 
-        // Retrieve deducted points
-        const deductedPoints = parseInt(localStorage.getItem("eco-deducted-points")) || 0;
-        const totalPoints = Math.max(0, basePoints - deductedPoints);
+        const isLoggedIn = !!localStorage.getItem("eco-login-email");
 
-        // Display results
-        if (pointsVal) {
-            pointsVal.textContent = `${totalPoints.toLocaleString()} P`;
-        }
+        if (isLoggedIn) {
+            // Retrieve deducted points
+            const deductedPoints = parseInt(localStorage.getItem("eco-deducted-points")) || 0;
+            const totalPoints = Math.max(0, basePoints - deductedPoints);
 
-        // Sync with header points display
-        if (headerPointsNum) {
-            headerPointsNum.textContent = `${totalPoints.toLocaleString()} P`;
+            // Display results
+            if (pointsVal) {
+                pointsVal.textContent = `${totalPoints.toLocaleString()} P`;
+                pointsVal.style.fontSize = "3rem";
+            }
+            if (pointsDesc) {
+                pointsDesc.innerHTML = "에코팡 다회용 박스 수거 참여에 감사드립니다. 적립된 친환경 포인트로 아래 상점의 원하시는 상품을 바로 교환해 보세요.";
+            }
+
+            // Sync with header points display
+            if (headerPointsNum) {
+                headerPointsNum.textContent = `${totalPoints.toLocaleString()} P`;
+            }
+        } else {
+            // Display locked state
+            if (pointsVal) {
+                pointsVal.textContent = "로그인 필요";
+                pointsVal.style.fontSize = "2.2rem";
+            }
+            if (pointsDesc) {
+                pointsDesc.innerHTML = "보유 포인트를 조회하고 상품을 교환하려면 상단에서 <strong>로그인</strong>을 진행해 주세요.";
+            }
+
+            // Sync with header points display
+            if (headerPointsNum) {
+                headerPointsNum.textContent = "-";
+            }
         }
     }
 
@@ -270,6 +293,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
 
     const updateLoginUI = (isLoggedIn) => {
+        calculateEcoImpact();
+        
         if (isLoggedIn) {
             if (loginBtn) loginBtn.textContent = "로그아웃";
             if (mobileLoginBtn) mobileLoginBtn.textContent = "로그아웃";
@@ -373,6 +398,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const exchangeBtns = document.querySelectorAll(".btn-exchange");
     exchangeBtns.forEach(btn => {
         btn.addEventListener("click", () => {
+            const isLoggedIn = !!localStorage.getItem("eco-login-email");
+            if (!isLoggedIn) {
+                alert("로그인이 필요한 서비스입니다.\n\n상단 로그인 버튼을 통해 로그인 후 에코픽 포인트로 상품을 교환하실 수 있습니다!");
+                openLoginModal();
+                return;
+            }
+
             const itemName = btn.getAttribute("data-item");
             const itemPrice = parseInt(btn.getAttribute("data-price"), 10);
             
@@ -382,7 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const currentPoints = parseInt(currentPointsText.replace(/[^0-9]/g, ""), 10) || 0;
             
             if (currentPoints < itemPrice) {
-                alert(`포인트가 부족합니다!\n\n현재 보유 에코픽 포인트: ${currentPoints.toLocaleString()} P\n필요 포인트: ${itemPrice.toLocaleString()} P\n\n시뮬레이터에서 '주간 택배 수령 횟수'를 조절해 포인트를 적립해 보세요!`);
+                alert(`포인트가 부족합니다!\n\n현재 보유 에코픽 포인트: ${currentPoints.toLocaleString()} P\n필요 포인트: ${itemPrice.toLocaleString()} P\n\n에코 박스 회수 수거 참여를 신청하여 포인트를 더 적립해 보세요!`);
             } else {
                 const confirmExchange = confirm(`🎉 에코픽 포인트를 교환하시겠습니까?\n\n상품명: ${itemName}\n소모 포인트: ${itemPrice.toLocaleString()} P\n\n교환을 승인하시려면 [확인]을 누르세요.`);
                 if (confirmExchange) {
