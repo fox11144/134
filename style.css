@@ -294,14 +294,17 @@ h1, h2, h3, h4 {
 .nav-menu {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 16px;
 }
 
 .nav-link {
     text-decoration: none;
     color: var(--text-sub);
-    font-weight: 500;
-    font-size: 0.95rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -2211,5 +2214,392 @@ body.dark-mode .footer {
     
     .qa-summary-box {
         padding: 24px;
+    }
+}
+
+/* Eco Point Shop (Eco Shop) */
+.eco-shop-box {
+    margin-top: 60px;
+    border-top: 1px solid var(--border);
+    padding-top: 50px;
+}
+
+.shop-header {
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.shop-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.shop-header p {
+    font-size: 1rem;
+    color: var(--text-sub);
+    max-width: 600px;
+}
+
+.shop-grid {
+    align-items: stretch;
+}
+
+.shop-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.shop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-light);
+}
+
+.shop-img-wrapper {
+    height: 160px;
+    background: linear-gradient(135deg, var(--bg-alt), var(--primary-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+}
+
+.shop-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: var(--secondary);
+    color: #1e293b;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.shop-item-icon {
+    width: 56px !important;
+    height: 56px !important;
+    color: var(--primary);
+    stroke-width: 1.5px;
+}
+
+.shop-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.shop-category {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-sub);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.shop-info h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+    height: 40px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.shop-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin: 4px 0 10px 0;
+}
+
+.price-val {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.price-unit {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    font-weight: 600;
+}
+
+.btn-exchange {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    margin-top: auto;
+}
+
+/* Recruit Section styling */
+.recruit-section {
+    padding: 100px 0;
+}
+
+.recruit-grid {
+    align-items: stretch;
+}
+
+.recruit-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: all 0.3s ease;
+}
+
+.recruit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.recruit-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+}
+
+.recruit-tag {
+    align-self: flex-start;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+}
+
+.tag-senior {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+.tag-youth {
+    background-color: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+}
+
+.recruit-card-header h3 {
+    font-size: 1.35rem;
+    color: var(--text-main);
+}
+
+.recruit-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.recruit-lead {
+    font-size: 0.98rem;
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.recruit-bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.recruit-bullet-list li {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    line-height: 1.5;
+    position: relative;
+    padding-left: 24px;
+}
+
+.recruit-bullet-list li i {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    color: var(--primary);
+}
+
+.recruit-bullet-list li strong {
+    color: var(--text-main);
+}
+
+.recruit-apply-btn {
+    width: 100%;
+    margin-top: auto;
+    padding: 12px;
+}
+
+/* News Section styling */
+.news-section {
+    padding: 100px 0;
+}
+
+.news-grid {
+    align-items: stretch;
+}
+
+.news-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-light);
+}
+
+.news-img-box {
+    height: 180px;
+    background: linear-gradient(135deg, var(--bg-alt), var(--border));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.news-icon-pic {
+    width: 64px !important;
+    height: 64px !important;
+    color: var(--text-sub);
+    stroke-width: 1.2px;
+}
+
+.news-text-box {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.news-item-date {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-sub);
+}
+
+.news-text-box h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.news-text-box p {
+    font-size: 0.88rem;
+    color: var(--text-sub);
+    line-height: 1.6;
+}
+
+/* Login Modal Specific styling */
+.login-modal-box {
+    max-width: 420px !important;
+}
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    color: var(--text-sub);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.login-divider::before, .login-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--border);
+}
+
+.social-logins {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-social {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 700;
+}
+
+.btn-kakao {
+    background-color: #fee500 !important;
+    color: #191919 !important;
+}
+
+.btn-kakao i {
+    fill: #191919;
+}
+
+.btn-naver {
+    background-color: #03c75a !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 1024px) {
+    .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .shop-grid {
+        grid-template-columns: 1fr;
+    }
+    .recruit-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .recruit-card {
+        padding: 24px;
+    }
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
 }

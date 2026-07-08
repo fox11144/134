@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "#home": "home-page",
         "#about": "about-page",
         "#persona": "persona-page",
-        "#scamper": "scamper-page",
-        "#gallery": "gallery-page",
         "#calculator": "calculator-page",
-        "#qa": "qa-page"
+        "#qa": "qa-page",
+        "#recruit": "recruit-page",
+        "#news": "news-page"
     };
 
     function switchPage(targetHash) {
@@ -144,152 +144,50 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 5. SCAMPER Tab Navigation
-    const scamperTabs = document.querySelectorAll(".scamper-tab");
-    const scamperPanels = document.querySelectorAll(".scamper-panel");
 
-    scamperTabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            // Remove active from all tabs
-            scamperTabs.forEach(t => t.classList.remove("active"));
-            // Add active to current tab
-            tab.classList.add("active");
-
-            // Hide all panels
-            scamperPanels.forEach(p => p.classList.remove("active"));
-
-            // Show target panel
-            const tabId = tab.getAttribute("data-tab");
-            const targetPanel = document.getElementById(`panel-${tabId}`);
-            if (targetPanel) {
-                targetPanel.classList.add("active");
-            }
-        });
-    });
-
-    // 6. Materials Gallery Lightbox
-    const galleryCards = document.querySelectorAll(".gallery-card");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightboxImg");
-    const lightboxCaption = document.getElementById("lightboxCaption");
-    const lightboxClose = document.getElementById("lightboxClose");
-    const lightboxPrev = document.getElementById("lightboxPrev");
-    const lightboxNext = document.getElementById("lightboxNext");
-
-    // Image sources array
-    const galleryItems = [
-        { src: "image/자료 1.png", alt: "자료 01 - 서비스 컨셉 & 페르소나 매칭" },
-        { src: "image/자료 2.png", alt: "자료 02 - SCAMPER 분석 및 개선안 도출" },
-        { src: "image/자료 3.png", alt: "자료 03 - 역물류 시스템 & ESG 선순환 구조" }
-    ];
-    let currentGalleryIndex = 0;
-
-    function showLightbox(index) {
-        currentGalleryIndex = index;
-        const item = galleryItems[index];
-        lightboxImg.src = item.src;
-        lightboxCaption.textContent = item.alt;
-        lightbox.classList.add("active");
-        document.body.style.overflow = "hidden";
-    }
-
-    function closeLightbox() {
-        lightbox.classList.remove("active");
-        document.body.style.overflow = "";
-    }
-
-    function prevImage() {
-        let index = currentGalleryIndex - 1;
-        if (index < 0) index = galleryItems.length - 1;
-        showLightbox(index);
-    }
-
-    function nextImage() {
-        let index = currentGalleryIndex + 1;
-        if (index >= galleryItems.length) index = 0;
-        showLightbox(index);
-    }
-
-    galleryCards.forEach((card, idx) => {
-        card.addEventListener("click", () => {
-            showLightbox(idx);
-        });
-    });
-
-    if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
-    if (lightboxPrev) lightboxPrev.addEventListener("click", prevImage);
-    if (lightboxNext) lightboxNext.addEventListener("click", nextImage);
-
-    // Close lightbox on click outside the image
-    if (lightbox) {
-        lightbox.addEventListener("click", (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-    }
-
-    // Keyboard navigation for lightbox
-    document.addEventListener("keydown", (e) => {
-        if (!lightbox.classList.contains("active")) return;
-        if (e.key === "Escape") closeLightbox();
-        if (e.key === "ArrowLeft") prevImage();
-        if (e.key === "ArrowRight") nextImage();
-    });
 
     // 7. Interactive Eco Calculator
-    const weeklyDeliverySlider = document.getElementById("weeklyDelivery");
-    const deliveryValDisplay = document.getElementById("deliveryVal");
-    const boxSizeSelect = document.getElementById("boxSize");
+        const weeklyDeliverySlider = document.getElementById("weeklyDelivery");
+        const deliveryValDisplay = document.getElementById("deliveryVal");
 
-    const carbonVal = document.getElementById("carbonVal");
-    const treeVal = document.getElementById("treeVal");
-    const pointsVal = document.getElementById("pointsVal");
-    const seniorTimeVal = document.getElementById("seniorTimeVal");
+        const carbonVal = document.getElementById("carbonVal");
+        const treeVal = document.getElementById("treeVal");
+        const pointsVal = document.getElementById("pointsVal");
+        const seniorTimeVal = document.getElementById("seniorTimeVal");
 
-    // Constants per box (unit: kg, points, hours)
-    const factorTable = {
-        "1": { carbon: 0.12, points: 100, seniorHours: 0.05 }, // Small
-        "2": { carbon: 0.25, points: 150, seniorHours: 0.08 }, // Medium
-        "3": { carbon: 0.45, points: 250, seniorHours: 0.12 }  // Large
-    };
+        // Standard factors per box (unit: kg, points, hours)
+        const standardFactors = { carbon: 0.25, points: 150, seniorHours: 0.08 };
 
-    function calculateEcoImpact() {
-        const weeklyCount = parseInt(weeklyDeliverySlider.value, 10);
-        const selectedSize = boxSizeSelect.value;
-        const factors = factorTable[selectedSize] || factorTable["2"];
+        function calculateEcoImpact() {
+            const weeklyCount = parseInt(weeklyDeliverySlider.value, 10);
 
-        // Total boxes per year
-        const annualBoxes = weeklyCount * 52;
+            // Total boxes per year
+            const annualBoxes = weeklyCount * 52;
 
-        // Calculate values
-        const totalCarbon = (annualBoxes * factors.carbon).toFixed(1);
-        const totalPoints = annualBoxes * factors.points;
-        const totalSeniorHours = (annualBoxes * factors.seniorHours).toFixed(1);
+            // Calculate values
+            const totalCarbon = (annualBoxes * standardFactors.carbon).toFixed(1);
+            const totalPoints = annualBoxes * standardFactors.points;
+            const totalSeniorHours = (annualBoxes * standardFactors.seniorHours).toFixed(1);
 
-        // Pine trees calculation (1 tree absorbs ~6.6kg of CO2 per year)
-        const treesEquivalent = (parseFloat(totalCarbon) / 6.6).toFixed(1);
+            // Pine trees calculation (1 tree absorbs ~6.6kg of CO2 per year)
+            const treesEquivalent = (parseFloat(totalCarbon) / 6.6).toFixed(1);
 
-        // Display results
-        carbonVal.textContent = `${Number(totalCarbon).toLocaleString()} kg`;
-        treeVal.textContent = treesEquivalent;
-        pointsVal.textContent = `${totalPoints.toLocaleString()} P`;
-        seniorTimeVal.textContent = `${Number(totalSeniorHours).toLocaleString()} 시간`;
-    }
+            // Display results
+            carbonVal.textContent = `${Number(totalCarbon).toLocaleString()} kg`;
+            treeVal.textContent = treesEquivalent;
+            pointsVal.textContent = `${totalPoints.toLocaleString()} P`;
+            seniorTimeVal.textContent = `${Number(totalSeniorHours).toLocaleString()} 시간`;
+        }
 
-    if (weeklyDeliverySlider) {
-        weeklyDeliverySlider.addEventListener("input", (e) => {
-            deliveryValDisplay.textContent = `${e.target.value}회`;
-            calculateEcoImpact();
-        });
-    }
+        if (weeklyDeliverySlider) {
+            weeklyDeliverySlider.addEventListener("input", (e) => {
+                deliveryValDisplay.textContent = `${e.target.value}회`;
+                calculateEcoImpact();
+            });
+        }
 
-    if (boxSizeSelect) {
-        boxSizeSelect.addEventListener("change", calculateEcoImpact);
-    }
-
-    // Initial calculation
-    calculateEcoImpact();
+        // Initial calculation
+        calculateEcoImpact();
 
     // 8. Sponsorship Inquiry Modal Handler
     const sponsorBtn = document.getElementById("sponsorBtn");
@@ -378,4 +276,121 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // 10. Login Modal Handlers
+    const loginBtn = document.getElementById("loginBtn");
+    const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+    const loginModal = document.getElementById("loginModal");
+    const loginModalClose = document.getElementById("loginModalClose");
+    const loginForm = document.getElementById("loginForm");
+
+    // Restore login state from localStorage on load
+    const savedLoginEmail = localStorage.getItem("eco-login-email");
+    if (savedLoginEmail) {
+        if (loginBtn) loginBtn.textContent = "로그아웃";
+        if (mobileLoginBtn) mobileLoginBtn.textContent = "로그아웃";
+    }
+
+    const openLoginModal = () => {
+        if (loginModal) {
+            loginModal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+    };
+
+    const closeLoginModal = () => {
+        if (loginModal) {
+            loginModal.classList.remove("active");
+            document.body.style.overflow = "";
+            if (loginForm) loginForm.reset();
+        }
+    };
+
+    const handleLoginClick = (e) => {
+        if (e) e.preventDefault();
+        const isLoggedIn = localStorage.getItem("eco-login-email");
+        if (isLoggedIn) {
+            // Logout flow
+            localStorage.removeItem("eco-login-email");
+            alert("로그아웃되었습니다.");
+            if (loginBtn) loginBtn.textContent = "로그인";
+            if (mobileLoginBtn) mobileLoginBtn.textContent = "로그인";
+        } else {
+            // Login flow (Open modal)
+            openLoginModal();
+        }
+    };
+
+    if (loginBtn) loginBtn.addEventListener("click", handleLoginClick);
+    if (mobileLoginBtn) mobileLoginBtn.addEventListener("click", handleLoginClick);
+    if (loginModalClose) loginModalClose.addEventListener("click", closeLoginModal);
+    
+    if (loginModal) {
+        loginModal.addEventListener("click", (e) => {
+            if (e.target === loginModal) {
+                closeLoginModal();
+            }
+        });
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("loginEmail").value;
+            alert(`환영합니다! ${email} 계정으로 로그인이 완료되었습니다.`);
+            
+            // Persist login state
+            localStorage.setItem("eco-login-email", email);
+            
+            closeLoginModal();
+            // Change login buttons to logout
+            if (loginBtn) loginBtn.textContent = "로그아웃";
+            if (mobileLoginBtn) mobileLoginBtn.textContent = "로그아웃";
+        });
+    }
+
+    // 11. Point Exchange Shop Handler (connected to Simulator pointsVal)
+    const exchangeBtns = document.querySelectorAll(".btn-exchange");
+    exchangeBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const itemName = btn.getAttribute("data-item");
+            const itemPrice = parseInt(btn.getAttribute("data-price"), 10);
+            
+            // Extract numerical value from pointsVal (e.g. "15,600 P" -> 15600)
+            const pointsValEl = document.getElementById("pointsVal");
+            const currentPointsText = pointsValEl ? pointsValEl.textContent : "0 P";
+            const currentPoints = parseInt(currentPointsText.replace(/[^0-9]/g, ""), 10) || 0;
+            
+            if (currentPoints < itemPrice) {
+                alert(`포인트가 부족합니다!\n\n현재 보유 에코픽 포인트: ${currentPoints.toLocaleString()} P\n필요 포인트: ${itemPrice.toLocaleString()} P\n\n시뮬레이터에서 '주간 택배 수령 횟수'를 조절해 포인트를 적립해 보세요!`);
+            } else {
+                const confirmExchange = confirm(`🎉 에코픽 포인트를 교환하시겠습니까?\n\n상품명: ${itemName}\n소모 포인트: ${itemPrice.toLocaleString()} P\n\n교환을 승인하시려면 [확인]을 누르세요.`);
+                if (confirmExchange) {
+                    alert(`교환 신청이 성공적으로 완료되었습니다!\n\n차감 포인트: ${itemPrice.toLocaleString()} P\n\n작성하신 휴대폰 기프티콘 번호로 모바일 쿠폰이 즉시 전송됩니다.`);
+                }
+            }
+        });
+    });
+
+    // 12. Recruitment Application Handler (Requires login check)
+    const applySeniorBtn = document.getElementById("applySeniorBtn");
+    const applyYouthBtn = document.getElementById("applyYouthBtn");
+
+    const handleApply = (role) => {
+        const isLoggedIn = localStorage.getItem("eco-login-email");
+        if (!isLoggedIn) {
+            alert("로그인이 필요한 서비스입니다.\n\n상단의 [로그인] 버튼을 눌러 로그인을 먼저 진행해 주세요!");
+            // Automatically trigger login modal opening
+            openLoginModal();
+        } else {
+            if (role === "senior") {
+                alert("시니어 크루 지원이 성공적으로 접수되었습니다!\n\n은평구/서대문구 시니어클럽의 채용 담당자가 기재하신 번호로 유선 연락드리겠습니다.");
+            } else if (role === "youth") {
+                alert("지역 거점 물류 매니저 지원 서류가 성공적으로 접수되었습니다!\n\n가입해 주신 이메일 주소로 상세 입사 지원 서류 가이드와 양식을 즉시 전송해 드리겠습니다.");
+            }
+        }
+    };
+
+    if (applySeniorBtn) applySeniorBtn.addEventListener("click", () => handleApply("senior"));
+    if (applyYouthBtn) applyYouthBtn.addEventListener("click", () => handleApply("youth"));
 });
