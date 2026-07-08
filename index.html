@@ -404,38 +404,42 @@
         <div id="persona-page" class="page-content">
             <section class="persona-section" id="persona">
                 <div class="container">
-                    <div class="section-header">
-                        <h2 class="section-title">타겟 고객 분석</h2>
-                        <p class="section-desc">에코팡 서비스를 주로 이용하는 핵심 타겟 고객의 입체적 니즈와 행태 분석입니다.</p>
+                    <div class="section-header" style="text-align: center; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                        <h2 class="section-title" style="font-size: 2.2rem; font-weight: 900; color: var(--text-main); margin-top: 10px;">타겟 고객: 택배 쓰레기가 고민인 직장인</h2>
+                        <p class="section-desc" style="font-size: 1.05rem; color: var(--text-sub); max-width: 600px; line-height: 1.6; margin: 0; text-align: center;">바쁜 일상 속에서 매일 쌓여가는 택배 박스, 비닐 테이프, 플라스틱 완충재 처리에 피로를 느끼는 현대 직장인 분석입니다.</p>
                     </div>
                     
-                    <div class="persona-container-centered" style="display: flex; justify-content: center; max-width: 800px; margin: 0 auto;">
+                    <div class="persona-container-centered" style="display: flex; justify-content: center; max-width: 800px; margin: 0 auto; width: 100%;">
                         <!-- Customer Persona -->
-                        <div class="persona-card card-consumer" style="width: 100%;">
-                            <div class="persona-header">
-                                <div class="persona-avatar">
-                                    <div class="avatar-bg bg-consumer">
-                                        <i data-lucide="user"></i>
-                                    </div>
+                        <div class="persona-card card-consumer" style="width: 100%; background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 24px; padding: 32px; box-shadow: var(--shadow);">
+                            <div class="persona-header" style="display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--border); padding-bottom: 20px; margin-bottom: 24px;">
+                                <div class="persona-avatar" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(25, 135, 84, 0.1); color: var(--primary);">
+                                    <i data-lucide="user" style="width: 30px; height: 30px;"></i>
                                 </div>
-                                <div class="persona-meta">
-                                    <span class="persona-badge bg-consumer-badge">직장인 고객 페르소나</span>
-                                    <h3>이미선 <span class="age">(36세)</span></h3>
-                                    <p class="persona-status">바쁜 일상 속 택배 쓰레기 처리가 고민인 직장인</p>
+                                <div class="persona-meta" style="text-align: left;">
+                                    <span class="persona-badge bg-consumer-badge" style="background: rgba(25, 135, 84, 0.1); color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;">핵심 페르소나</span>
+                                    <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-main); margin: 6px 0 2px 0;">이미선 <span class="age" style="font-size: 0.95rem; font-weight: 500; color: var(--text-sub);">(36세 / 직장인)</span></h3>
+                                    <p class="persona-status" style="font-size: 0.88rem; color: var(--text-sub); font-weight: 600; margin: 0;">"매번 쓸데없이 낭비되는 상자가 많아 신경 쓰이고, 과대포장으로 방이 어질러지는 데다 완충재 때문에 지저분해요."</p>
                                 </div>
                             </div>
-                            <div class="persona-body">
+                            <div class="persona-body" style="display: flex; flex-direction: column; gap: 20px; text-align: left;">
                                 <div class="persona-info-block">
-                                    <h4><i data-lucide="trending-up"></i> 현황 및 행동</h4>
-                                    <p>온라인 쇼핑을 자주 이용하나, 퇴근 후 현관에 택배 상자를 며칠씩 방치해 둡니다.</p>
+                                    <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--text-main); margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px;"><i data-lucide="trending-up" style="color: var(--primary); width: 18px; height: 18px;"></i> 현황 및 행동 패턴</h4>
+                                    <p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.6; margin: 0;">
+                                        잦은 야근과 피로로 인해 주로 새벽배송과 온라인 쇼핑을 애용합니다. 고단한 퇴근 이후 택배 상자를 개봉하고 분리수거하는 일을 미루다 보니, 현관이나 좁은 다용도실에 배송 박스와 플라스틱 완충재가 며칠씩 방치되어 주거 공간이 좁아지는 시각적 피로감을 겪고 있습니다.
+                                    </p>
                                 </div>
                                 <div class="persona-info-block text-danger">
-                                    <h4><i data-lucide="alert-triangle"></i> 주요 불편함 (Pain Point)</h4>
-                                    <p>테이프 제거, 뽁뽁이 분리수거 등 번거로운 택배 쓰레기 처리 노동과 좁은 공간에 쌓이는 쓰레기로 피로감과 짜증을 느낌. <strong>"친환경은 좋지만 귀찮은 것은 사절!"</strong></p>
+                                    <h4 style="font-size: 1.05rem; font-weight: 800; color: #dc3545; margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px;"><i data-lucide="alert-triangle" style="width: 18px; height: 18px;"></i> 핵심 불편함 (Pain Point)</h4>
+                                    <p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.6; margin: 0;">
+                                        작은 물건 하나를 사도 매번 <strong>쓸데없이 낭비되는 상자가 너무 많아 버릴 때마다 신경 쓰이고</strong> 죄책감이 듭니다. 또한 과대포장 때문에 <strong>쓰레기 부피가 너무 커서 좁은 방 안이 온통 어질러지기</strong> 일쑤며, 포장을 뜯을 때 정전기로 날리는 비닐 완충재(뽁뽁이) 찌꺼기들 때문에 <strong>완충재 가루로 방이 지저분하고 더러워져</strong> 퇴근 후 집을 볼 때마다 피로감과 스트레스를 느낍니다.
+                                    </p>
                                 </div>
                                 <div class="persona-info-block text-success">
-                                    <h4><i data-lucide="check-circle-2"></i> 요구 사항 (Needs)</h4>
-                                    <p>도구 없이 1초 만에 개봉되는 상자, 과대포장이 없는 패키징, 그리고 참여에 대한 직관적인 포인트 보상(앱테크)을 희망.</p>
+                                    <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--primary); margin: 0 0 6px 0; display: flex; align-items: center; gap: 8px;"><i data-lucide="check-circle-2" style="width: 18px; height: 18px;"></i> 서비스 요구 사항 (Needs)</h4>
+                                    <p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.6; margin: 0;">
+                                        일회용 택배 <strong>박스 사용과 낭비를 원천적으로 줄이고 싶어 하며</strong>, 비닐 완충재가 없는 초밀착 슬림 패키징이나 다회용 프레시백 활성화를 요구합니다. 또한, 어쩔 수 없이 배송된 박스는 집 앞에 내놓기만 하면 간편하게 회수되어 재사용되는 자원 순환에 적극 동참하고, 이에 따른 에코 포인트를 보상받기를 희망합니다.
+                                    </p>
                                 </div>
                             </div>
                         </div>
