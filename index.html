@@ -30,12 +30,13 @@
     <!-- Navigation Bar -->
     <header class="header">
         <div class="container nav-container">
-            <a href="#about" class="logo-area page-nav-link">
+            <a href="#home" class="logo-area page-nav-link">
                 <img src="image/로고-removebg-preview.png" alt="에코팡 로고" class="nav-logo" id="navLogo">
                 <span class="logo-text">에코팡<span class="logo-sub">EcoPang</span></span>
             </a>
             <nav class="nav-menu">
-                <a href="#about" class="nav-link page-nav-link active">서비스 소개</a>
+                <a href="#home" class="nav-link page-nav-link active">홈</a>
+                <a href="#about" class="nav-link page-nav-link">소개글</a>
                 <a href="#persona" class="nav-link page-nav-link">타겟 & 파트너</a>
                 <a href="#scamper" class="nav-link page-nav-link">SCAMPER</a>
                 <a href="#gallery" class="nav-link page-nav-link">자료실</a>
@@ -61,7 +62,8 @@
             <button class="drawer-close" id="drawerClose"><i data-lucide="x"></i></button>
         </div>
         <nav class="drawer-nav">
-            <a href="#about" class="drawer-link page-nav-link">서비스 소개</a>
+            <a href="#home" class="drawer-link page-nav-link">홈</a>
+            <a href="#about" class="drawer-link page-nav-link">소개글</a>
             <a href="#persona" class="drawer-link page-nav-link">타겟 & 파트너</a>
             <a href="#scamper" class="drawer-link page-nav-link">SCAMPER</a>
             <a href="#gallery" class="drawer-link page-nav-link">자료실</a>
@@ -71,71 +73,132 @@
     <div class="drawer-overlay" id="drawerOverlay"></div>
 
     <main>
-        <!-- PAGE 1: About / 서비스 소개 -->
-        <div id="about-page" class="page-content active-page">
-            <!-- Hero Section -->
-            <section class="hero-section" id="about">
+        <!-- PAGE 0: 홈 화면 -->
+        <div id="home-page" class="page-content active-page">
+            <section class="home-section" id="home">
                 <div class="hero-bg-shapes">
                     <div class="shape shape-1"></div>
                     <div class="shape shape-2"></div>
                 </div>
-                <div class="container hero-container">
-                    <div class="hero-content">
-                        <div class="badge">
-                            <i data-lucide="leaf" size="14"></i> ESG & 디자인 씽킹 개선안
-                        </div>
-                        <h1 class="hero-title">
-                            귀찮음 없는 친환경,<br>
-                            <span class="text-gradient">에코팡(EcoPang)</span>
-                        </h1>
-                        <p class="hero-subtitle">
-                            "1초 만에 뜯는 종이 지퍼선 박스"와 "시니어 파트너의 동네 회수 서비스"가 결합되어, 
-                            소비자의 쓰레기 배출 스트레스를 없애고 지역사회 노인 일자리를 창출하는 상생 선순환 플랫폼입니다.
-                        </p>
-                        <div class="hero-tags">
-                            <span class="tag">#친환경커머스</span>
-                            <span class="tag">#시니어일자리</span>
-                            <span class="tag">#1초박스</span>
-                            <span class="tag">#ESG경영</span>
-                        </div>
-                        <div class="hero-actions">
-                            <a href="#persona" class="btn btn-primary page-nav-link">페르소나 분석 보기</a>
-                            <a href="#scamper" class="btn btn-secondary page-nav-link">아이디어 보기</a>
-                        </div>
-                    </div>
-                    <div class="hero-image-area">
-                        <div class="logo-frame">
+                <div class="container home-container">
+                    <!-- Left Column: 로고 이미지 -->
+                    <div class="home-logo-area">
+                        <div class="logo-frame logo-frame-lg">
                             <div class="logo-glow"></div>
                             <img src="image/로고-removebg-preview.png" alt="에코팡 로고" class="hero-logo animate-bounce">
                         </div>
                     </div>
+                    
+                    <!-- Right Column: 슬로건 -->
+                    <div class="home-slogan-area">
+                        <div class="badge">
+                            <i data-lucide="sparkles" size="14"></i> 에코팡 ESG 상생 플랫폼
+                        </div>
+                        <h1 class="slogan-title">
+                            귀찮음 없는 친환경,<br>
+                            상생의 시작 <span class="text-gradient">에코팡</span>
+                        </h1>
+                        <p class="slogan-desc">
+                            칼 없이 1초 만에 뜯는 종이 지퍼선 박스로 쓰레기 배출 스트레스를 없애고,<br>
+                            동네 시니어 파트너의 박스 회수 서비스로 어르신들께 행복한 일자리를 드립니다.
+                        </p>
+                        <div class="slogan-tags">
+                            <span class="tag">#친환경 언박싱</span>
+                            <span class="tag">#시니어 동네 일자리</span>
+                            <span class="tag">#100% 자원 선순환</span>
+                        </div>
+                        <div class="slogan-actions">
+                            <a href="#about" class="btn btn-primary page-nav-link">서비스 소개글 보기 <i data-lucide="arrow-right" style="margin-left: 8px; width: 16px; height: 16px;"></i></a>
+                        </div>
+                    </div>
                 </div>
             </section>
+        </div>
 
-            <!-- Value Proposition Summary -->
-            <section class="value-prop">
+        <!-- PAGE 1: 소개글 -->
+        <div id="about-page" class="page-content">
+            <section class="intro-section" id="about">
+                <div class="hero-bg-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                </div>
+                
                 <div class="container">
-                    <div class="grid grid-3">
-                        <div class="value-card">
-                            <div class="value-icon-wrapper color-green">
-                                <i data-lucide="zap"></i>
-                            </div>
-                            <h3>1초 원터치 박스</h3>
-                            <p>비닐 테이프와 칼이 필요 없는 종이 지퍼선 개봉으로 포장 쓰레기 해소</p>
+                    <!-- Brand Top Header (Logo featured in the center) -->
+                    <div class="intro-brand-header">
+                        <div class="logo-frame logo-frame-sm animate-bounce">
+                            <div class="logo-glow"></div>
+                            <img src="image/로고-removebg-preview.png" alt="에코팡 로고" class="hero-logo">
                         </div>
-                        <div class="value-card">
-                            <div class="value-icon-wrapper color-blue">
-                                <i data-lucide="users"></i>
+                        <h1 class="intro-main-title">에코팡 <span class="text-gradient">EcoPang</span></h1>
+                        <p class="intro-main-subtitle">귀찮음 없는 친환경과 시니어 일자리의 선순환 비즈니스 모델</p>
+                    </div>
+
+                    <!-- Redesigned Two-Column Content -->
+                    <div class="grid grid-2 intro-two-column">
+                        <!-- Left Column: 서비스 소개글 -->
+                        <div class="intro-card service-intro">
+                            <div class="intro-card-header">
+                                <div class="intro-icon bg-consumer"><i data-lucide="leaf"></i></div>
+                                <h2>에코팡 서비스 소개</h2>
                             </div>
-                            <h3>시니어 지역 일자리</h3>
-                            <p>동네 어르신들로 구성된 전담팀이 역물류 배송 박스를 수거하여 활력 충전</p>
+                            <div class="intro-card-body">
+                                <p class="intro-desc-lead">
+                                    에코팡은 바쁜 현대인들의 택배 포장재 배출 스트레스와 과대 포장 문제를 해결하는 혁신적인 친환경 역물류 플랫폼입니다.
+                                </p>
+                                <div class="intro-feature-list">
+                                    <div class="intro-feature-item">
+                                        <div class="feature-bullet"><i data-lucide="zap"></i></div>
+                                        <div>
+                                            <h4>도구 없는 1초 개봉</h4>
+                                            <p>칼이나 가위 없이 손가락 하나로 지퍼선 박스를 개봉하여, 비닐 테이프 제거 노동을 없앱니다.</p>
+                                        </div>
+                                    </div>
+                                    <div class="intro-feature-item">
+                                        <div class="feature-bullet"><i data-lucide="award"></i></div>
+                                        <div>
+                                            <h4>참여형 에코 포인트 앱테크</h4>
+                                            <p>박스 수거 신청 시 에코픽 포인트 리워드를 지급하여, 친환경 행동이 확실한 성취감과 혜택으로 이어집니다.</p>
+                                        </div>
+                                    </div>
+                                    <div class="intro-feature-item">
+                                        <div class="feature-bullet"><i data-lucide="package"></i></div>
+                                        <div>
+                                            <h4>3D AI 핏 맞춤 패키징</h4>
+                                            <p>과포장을 차단하고 빈 공간을 최소화하여 원천적인 물류 효율을 극대화합니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="value-card">
-                            <div class="value-icon-wrapper color-gold">
-                                <i data-lucide="award"></i>
+
+                        <!-- Right Column: 기업 소개글 -->
+                        <div class="intro-card company-intro">
+                            <div class="intro-card-header">
+                                <div class="intro-icon bg-senior"><i data-lucide="building-2"></i></div>
+                                <h2>에코팡 기업 소개</h2>
                             </div>
-                            <h3>에코픽 포인트 리워드</h3>
-                            <p>수거된 박스당 포인트를 지급하여 지속가능한 친환경 앱테크 실현</p>
+                            <div class="intro-card-body">
+                                <p class="intro-desc-lead">
+                                    에코팡 주식회사는 환경 보존(E)과 소외 계층 일자리 창출(S)을 혁신적인 비즈니스 모델로 연결하는 ESG 상생 혁신 벤처 기업입니다.
+                                </p>
+                                <p class="intro-desc-text">
+                                    우리는 단순한 박스 판매를 넘어, 동네 기반 시니어 인력을 활용한 박스 역물류 회수 생태계를 구축하고 있습니다. 은퇴한 어르신들에게 유연하고 안전한 동네 일자리를 제공함으로써 사회적 활력을 불어넣고, 수거된 자원은 100% 자원화 사이클을 통해 자원 재활용률 극대화에 앞장섭니다.
+                                </p>
+                                <div class="intro-company-vision">
+                                    <div class="vision-item">
+                                        <strong>비전</strong>
+                                        <span>물류 폐기물 Zero & 시니어 행복 상생 일터 구축</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Sponsorship Inquiry Button -->
+                                <div class="intro-action-area">
+                                    <button class="btn btn-primary btn-sponsorship" id="sponsorBtn">
+                                        <i data-lucide="mail"></i> 기업 협찬 및 파트너십 문의
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -242,7 +305,19 @@
                                 <div class="scamper-icon color-s"><i data-lucide="arrow-right-left"></i></div>
                                 <div class="scamper-text">
                                     <h3><span class="scamper-letter">S</span>Substitute (대체하기)</h3>
-                                    <p class="scamper-summary">기존의 비닐 테이프와 완충재를 100% 친환경 소재로 변경합니다.</p>
+                                    
+                                    <div class="scamper-qa-container">
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="help-circle"></i> 핵심 질문 (Question)</span>
+                                            <span class="scamper-qa-val">포장재료·접착제·배송수단 중 무엇을 더 친환경적인 것으로 대체할 수 있을까?</span>
+                                        </div>
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="play-circle"></i> 비즈니스 적용안 (Startup Case)</span>
+                                            <span class="scamper-qa-val">비닐 테이프와 스티로폼을 100% 종이 지퍼선 박스와 생분해성 완충재로 대체</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="scamper-list-title"><i data-lucide="check-square"></i> 세부 실행 과제</span>
                                     <ul class="scamper-list">
                                         <li>비닐 테이프 대신 <strong>100% 종이 지퍼선 박스</strong> 도입</li>
                                         <li>화학 합성 스티로폼 완충재 대신 <strong>생분해성 천연 완충재</strong> 사용</li>
@@ -255,7 +330,19 @@
                                 <div class="scamper-icon color-c"><i data-lucide="merge"></i></div>
                                 <div class="scamper-text">
                                     <h3><span class="scamper-letter">C</span>Combine (결합하기)</h3>
-                                    <p class="scamper-summary">첨단 물류 기술과 고객 포인트 리워드 시스템의 융합.</p>
+                                    
+                                    <div class="scamper-qa-container">
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="help-circle"></i> 핵심 질문 (Question)</span>
+                                            <span class="scamper-qa-val">물류 기술과 고객 보상 시스템을 결합하면 어떤 가치가 생길까?</span>
+                                        </div>
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="play-circle"></i> 비즈니스 적용안 (Startup Case)</span>
+                                            <span class="scamper-qa-val">XR 물류 기술(AI 핏 패키징) + 에코픽 포인트 결합 -> 과대 포장 방지 및 고객 참여 유도</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="scamper-list-title"><i data-lucide="check-square"></i> 세부 실행 과제</span>
                                     <ul class="scamper-list">
                                         <li><strong>XR 물류 기술 (AI 핏 패키징)</strong>과 <strong>에코픽 포인트 보상 시스템</strong>을 결합</li>
                                         <li>과대 포장을 방지하면서 고객에게 명확한 포인트 앱테크 혜택 지급</li>
@@ -268,7 +355,19 @@
                                 <div class="scamper-icon color-a"><i data-lucide="lightbulb"></i></div>
                                 <div class="scamper-text">
                                     <h3><span class="scamper-letter">A</span>Adapt (응용하기)</h3>
-                                    <p class="scamper-summary">일상 속 편리한 박스 뜯기 형태를 대형 배송 박스에 차용.</p>
+                                    
+                                    <div class="scamper-qa-container">
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="help-circle"></i> 핵심 질문 (Question)</span>
+                                            <span class="scamper-qa-val">과자 산업의 원터치 뜯기 방식을 우리 박스에 응용하면 어떻게 될까?</span>
+                                        </div>
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="play-circle"></i> 비즈니스 적용안 (Startup Case)</span>
+                                            <span class="scamper-qa-val">과자 상자의 지퍼선 방식을 택배 박스에 응용 -> 테이프 분리 스트레스 제거</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="scamper-list-title"><i data-lucide="check-square"></i> 세부 실행 과제</span>
                                     <ul class="scamper-list">
                                         <li>과자 상자의 <strong>원터치 뜯기(지퍼선)</strong> 방식을 택배 박스 설계에 응용</li>
                                         <li>칼, 가위 등 별도의 도구 없이 손으로 1초 만에 깔끔한 개봉 가능</li>
@@ -281,7 +380,19 @@
                                 <div class="scamper-icon color-m"><i data-lucide="maximize-2"></i></div>
                                 <div class="scamper-text">
                                     <h3><span class="scamper-letter">M</span>Modify / Magnify (수정·확대하기)</h3>
-                                    <p class="scamper-summary">박스의 크기와 부피를 가변적으로 조절하여 불필요한 적재 공간 절약.</p>
+                                    
+                                    <div class="scamper-qa-container">
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="help-circle"></i> 핵심 질문 (Question)</span>
+                                            <span class="scamper-qa-val">박스 크기와 포장 기능을 최적화하면 어떤 효과가 있을까?</span>
+                                        </div>
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="play-circle"></i> 비즈니스 적용안 (Startup Case)</span>
+                                            <span class="scamper-qa-val">3D AI 핏 패키징으로 상자 크기를 상품에 최적화 -> 빈 공간 최소화 및 물류 효율 극대화</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="scamper-list-title"><i data-lucide="check-square"></i> 세부 실행 과제</span>
                                     <ul class="scamper-list">
                                         <li><strong>3D AI 핏 패키징 기술</strong>을 통한 박스 규격 다양화 및 상품 맞춤 제작</li>
                                         <li>포장 내부의 빈 공간을 최소화하여 완충재 소모 및 물류 적재 면적 절약</li>
@@ -294,7 +405,19 @@
                                 <div class="scamper-icon color-p"><i data-lucide="redo-2"></i></div>
                                 <div class="scamper-text">
                                     <h3><span class="scamper-letter">P</span>Put to other use (용도 전환하기)</h3>
-                                    <p class="scamper-summary">단순히 버려지던 박스를 일상 인테리어 소품 및 도구로 활용.</p>
+                                    
+                                    <div class="scamper-qa-container">
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="help-circle"></i> 핵심 질문 (Question)</span>
+                                            <span class="scamper-qa-val">배송된 박스나 프레시백의 용도를 어떻게 전환할 수 있을까?</span>
+                                        </div>
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="play-circle"></i> 비즈니스 적용안 (Startup Case)</span>
+                                            <span class="scamper-qa-val">배송된 박스를 고객이 식물 화분이나 수납함으로 쉽게 용도 전환할 수 있도록 디자인 제공</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="scamper-list-title"><i data-lucide="check-square"></i> 세부 실행 과제</span>
                                     <ul class="scamper-list">
                                         <li>배송 완료된 박스를 조립하여 <strong>식물 화분</strong> 또는 <strong>가정 수납함</strong>으로 변형 가능하도록 칼선 제공</li>
                                         <li>박스 외관에 감성적인 패턴 및 가이드라인을 인쇄하여 업사이클링 유도</li>
@@ -307,7 +430,19 @@
                                 <div class="scamper-icon color-e"><i data-lucide="trash-2"></i></div>
                                 <div class="scamper-text">
                                     <h3><span class="scamper-letter">E</span>Eliminate (제거하기)</h3>
-                                    <p class="scamper-summary">불필요하고 재활용이 불가능한 포장 부자재의 과감한 삭제.</p>
+                                    
+                                    <div class="scamper-qa-container">
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="help-circle"></i> 핵심 질문 (Question)</span>
+                                            <span class="scamper-qa-val">포장과 분리수거 단계 중 무엇을 없애도 고객은 불편하지 않을까?</span>
+                                        </div>
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="play-circle"></i> 비즈니스 적용안 (Startup Case)</span>
+                                            <span class="scamper-qa-val">비닐 테이프 제거 및 과대 포장 완충재 제거 -> 소비자의 테이프 분리 노동 및 쓰레기 부피 제거</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="scamper-list-title"><i data-lucide="check-square"></i> 세부 실행 과제</span>
                                     <ul class="scamper-list">
                                         <li><strong>플라스틱/비닐 테이프 제거</strong> 및 과대포장용 플라스틱 완충재(뽁뽁이) 100% 제거</li>
                                         <li>소비자의 수거 전 테이프 분리 노동을 0(Zero)으로 줄임</li>
@@ -320,7 +455,19 @@
                                 <div class="scamper-icon color-r"><i data-lucide="shuffle"></i></div>
                                 <div class="scamper-text">
                                     <h3><span class="scamper-letter">R</span>Reverse / Rearrange (역발상·재배치하기)</h3>
-                                    <p class="scamper-summary">박스 수거 주체의 발상 전환을 통한 사회적 가치 창출.</p>
+                                    
+                                    <div class="scamper-qa-container">
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="help-circle"></i> 핵심 질문 (Question)</span>
+                                            <span class="scamper-qa-val">배송 기사의 회수 부담을 취약계층의 역할로 바꾸면 어떤 기회가 생길까?</span>
+                                        </div>
+                                        <div class="scamper-qa-row">
+                                            <span class="scamper-qa-label"><i data-lucide="play-circle"></i> 비즈니스 적용안 (Startup Case)</span>
+                                            <span class="scamper-qa-val">시니어 및 취약계층 회수 전담팀 구성 -> 배송 기사 부담 경감 및 노인 일자리 창출 (E-S 결합)</span>
+                                        </div>
+                                    </div>
+
+                                    <span class="scamper-list-title"><i data-lucide="check-square"></i> 세부 실행 과제</span>
                                     <ul class="scamper-list">
                                         <li>배송 기사의 박스 회수 부담을 동네 시니어 인력으로 <strong>재배치</strong></li>
                                         <li>동네 기반 <strong>시니어 박스 회수 전담팀</strong>을 운영하여 노인 친화적 일자리 창출</li>
@@ -508,6 +655,45 @@
             </div>
         </div>
     </footer>
+
+    <!-- Sponsorship Inquiry Modal -->
+    <div class="modal-overlay" id="sponsorModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i data-lucide="building-2"></i> 기업 협찬 및 파트너십 문의</h3>
+                <button class="modal-close" id="sponsorModalClose"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="sponsorForm">
+                    <div class="form-group">
+                        <label for="compName">기업명 / 단체명</label>
+                        <input type="text" id="compName" required class="select-input" placeholder="예: 에코 기업">
+                    </div>
+                    <div class="form-group">
+                        <label for="compEmail">담당자 이메일</label>
+                        <input type="email" id="compEmail" required class="select-input" placeholder="example@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="compMsg">문의 내용</label>
+                        <textarea id="compMsg" required class="select-input" rows="4" placeholder="협찬 방식 또는 파트너십 제안 사항을 입력하세요."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 0.95rem; padding: 12px;">문의 신청하기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Inquiry Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-box success-modal-box">
+            <div class="success-icon-wrapper">
+                <i data-lucide="check-circle" class="success-check-icon"></i>
+            </div>
+            <h3 class="success-title">문의 접수 완료</h3>
+            <p class="success-msg">기업 협찬 및 파트너십 문의가 성공적으로 신청되었습니다.<br>입력해 주신 이메일로 담당자가 조속히 회신해 드리겠습니다.</p>
+            <button class="btn btn-primary" id="successModalCloseBtn" style="width: 100%; margin-top: 10px;">확인</button>
+        </div>
+    </div>
 
     <!-- Script -->
     <script src="script.js"></script>

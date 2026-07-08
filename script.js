@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Mapping link hashes to page section IDs
     const pageMap = {
+        "#home": "home-page",
         "#about": "about-page",
         "#persona": "persona-page",
         "#scamper": "scamper-page",
@@ -74,12 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle back/forward browser buttons
     window.addEventListener("popstate", () => {
-        const hash = window.location.hash || "#about";
+        const hash = window.location.hash || "#home";
         switchPage(hash);
     });
 
     // Initial page load routing based on URL Hash
-    const initialHash = window.location.hash || "#about";
+    const initialHash = window.location.hash || "#home";
     if (initialHash && pageMap[initialHash]) {
         // Direct display on initial load, no delay needed
         pageSections.forEach(page => page.classList.remove("active-page"));
@@ -288,4 +289,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initial calculation
     calculateEcoImpact();
+
+    // 8. Sponsorship Inquiry Modal Handler
+    const sponsorBtn = document.getElementById("sponsorBtn");
+    const sponsorModal = document.getElementById("sponsorModal");
+    const sponsorModalClose = document.getElementById("sponsorModalClose");
+    const sponsorForm = document.getElementById("sponsorForm");
+
+    if (sponsorBtn && sponsorModal && sponsorModalClose) {
+        sponsorBtn.addEventListener("click", () => {
+            sponsorModal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+
+        const closeSponsorModal = () => {
+            sponsorModal.classList.remove("active");
+            document.body.style.overflow = "";
+            if (sponsorForm) sponsorForm.reset();
+        };
+
+        sponsorModalClose.addEventListener("click", closeSponsorModal);
+
+        // Close on clicking overlay
+        sponsorModal.addEventListener("click", (e) => {
+            if (e.target === sponsorModal) {
+                closeSponsorModal();
+            }
+        });
+
+        // Success Modal Controls
+        const successModal = document.getElementById("successModal");
+        const successModalCloseBtn = document.getElementById("successModalCloseBtn");
+
+        const closeSuccessModal = () => {
+            successModal.classList.remove("active");
+            document.body.style.overflow = "";
+        };
+
+        if (successModalCloseBtn && successModal) {
+            successModalCloseBtn.addEventListener("click", closeSuccessModal);
+            successModal.addEventListener("click", (e) => {
+                if (e.target === successModal) {
+                    closeSuccessModal();
+                }
+            });
+        }
+
+        if (sponsorForm) {
+            sponsorForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                // Close the input modal
+                closeSponsorModal();
+                // Open the success modal (custom dialog) in the center of the screen
+                if (successModal) {
+                    successModal.classList.add("active");
+                    document.body.style.overflow = "hidden";
+                }
+            });
+        }
+    }
 });
